@@ -11,7 +11,7 @@ public class TestBase {
     @BeforeMethod(alwaysRun = true)
     public void setUp(){
 
-        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         Driver.getDriver().manage().window().maximize();
         Driver.getDriver().get(ConfigReader.getProperty("url"));
     }

@@ -18,6 +18,18 @@ public class LoginPage {
     private WebElement password;
     @FindBy (xpath = "//button[@type='submit']")
     private WebElement SignInButton;
+    @FindBy (xpath = "//a[@class='dropdown-toggle nav-link dropdown-user-link']")
+    private WebElement username;
+    @FindBy (xpath = "//a[@href='logout.php']")
+    private WebElement logoutButton;
+
+    public WebElement getLogoutButton() {
+        return logoutButton;
+    }
+
+    public WebElement getUsername() {
+        return username;
+    }
 
     public WebElement getSignInButton() {
         return SignInButton;
