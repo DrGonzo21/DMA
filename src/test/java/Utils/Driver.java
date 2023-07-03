@@ -1,5 +1,4 @@
 package Utils;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -10,7 +9,6 @@ public class Driver {
     private static WebDriver driver;
 
     private Driver(){}
-
 
     public static WebDriver getDriver(){
         if(driver == null){  // if the driver object is not initialized, initialize it
@@ -25,20 +23,14 @@ public class Driver {
                 case "safari" -> driver = new SafariDriver();
                 default -> throw new IllegalArgumentException(browser + " -> this browser is not supported or invalid");
             }
-
-
         }
-
         return driver; // otherwise return the initialized driver object
     }
-
     public static void quitDriver(){
         if(driver != null){
             driver.quit();
             driver = null;
         }
-
     }
-
 }
 

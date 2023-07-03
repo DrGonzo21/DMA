@@ -1,6 +1,7 @@
 package Pages;
 
 import Utils.Driver;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -9,6 +10,7 @@ public class LoginPage {
     public LoginPage(){
         PageFactory.initElements(Driver.getDriver(), this); // this line initializes all @FindBy annotated variables
     }
+
 
     @FindBy (id = "exampleInputEmail1")
     private WebElement emailAddress;
@@ -28,4 +30,5 @@ public class LoginPage {
     public WebElement getPassword() {
         return password;
     }
+
 }
