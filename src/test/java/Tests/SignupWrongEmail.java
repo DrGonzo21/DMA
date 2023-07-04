@@ -17,19 +17,16 @@ public class SignupWrongEmail extends TestBase {
         String lastName = signup.getRandomLastName();
         String email = getRandomEmail();
         String password = signup.getRandomPassword();
-
         signup.getSignUpButton().click();
         signup.getFirstName().sendKeys(firstName);
         signup.getLastName().sendKeys(lastName);
         signup.getEmail().sendKeys(email);
         signup.getPassword1().sendKeys(password);
         signup.getRegisterButton().click();
-
         Assert.assertEquals(Driver.getDriver().getTitle(), "Register - Create an Account");
 
         writeCredentialsToCSV(email, password);
     }
-
     public String getRandomEmail() {
         String generatedString = RandomStringUtils.randomAlphabetic(300).toLowerCase();
         return generatedString + "@example.com";
@@ -45,4 +42,5 @@ public class SignupWrongEmail extends TestBase {
         }
     }
 }
+
 
