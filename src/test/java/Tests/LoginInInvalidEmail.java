@@ -10,7 +10,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class LoginInInvalidPassword extends TestBase{
+public class LoginInInvalidEmail extends TestBase{
     @Test
     public void LoginInInvalidPassword(){
 
