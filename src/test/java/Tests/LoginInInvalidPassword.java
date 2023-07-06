@@ -1,16 +1,19 @@
 package Tests;
 
 import Pages.LoginPage;
+import Pages.SignUpPage;
 import Utils.Driver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class LoginTest extends TestBase {
+public class LoginInInvalidPassword extends TestBase{
     @Test
-    public void LoginTest() {
+    public void LoginInInvalidPassword(){
+
         LoginPage login = new LoginPage();
         String filePath = "SignUp.csv";
 
@@ -19,15 +22,12 @@ public class LoginTest extends TestBase {
             while ((line = reader.readLine()) != null) {
                 String[] record = line.split(",");
                 if (record.length == 2) {
-                    String email = record[0].trim();
                     String password = record[1].trim();
 
 //
-                    login.getEmailAddress().sendKeys(email);
+                    login.getEmailAddress().sendKeys(new SignUpPage().getRandomEmail());
                     login.getPassword().sendKeys(password);
                     login.getSignInButton().click();
-                    login.getUsername().click();
-                    login.getLogoutButton().click();
                     String expected = "http://qa-duobank.us-east-2.elasticbeanstalk.com/index.php";
                     Assert.assertEquals(expected, Driver.getDriver().getCurrentUrl());
                 }
