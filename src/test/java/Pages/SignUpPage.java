@@ -1,6 +1,7 @@
 package Pages;
 
 import Utils.Driver;
+import com.github.javafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -70,5 +71,77 @@ public class SignUpPage {
     public String getRandomLastName() {
         return RandomStringUtils.randomAlphabetic(10);
     }
+
+    public void signUp(){
+        SignUpPage signUpPage = new SignUpPage();
+        Faker faker = new Faker();
+        String firstName=faker.name().firstName();
+        String lastName=faker.name().lastName();
+        String email=faker.name().username().replace(".","")+"@"+faker.internet().domainName();
+        String password=faker.internet().password(8,50,true,true,true);
+        signUpPage.getFirstName().sendKeys(firstName);
+        signUpPage.getLastName().sendKeys(lastName);
+        signUpPage.getEmail().sendKeys(email);
+        signUpPage.getPassword1().sendKeys(password);
+    }
+
+    public void signUpExistingCustomers(String firstName, String lastName,String email,String password){
+        SignUpPage signUpPage = new SignUpPage();
+        signUpPage.getFirstName().sendKeys(firstName);
+        signUpPage.getLastName().sendKeys(lastName);
+        signUpPage.getEmail().sendKeys(email);
+        signUpPage.getPassword1().sendKeys(password);
+    }
+
+    public void signUpCustomFirstName(String firstName){
+        SignUpPage signUpPage = new SignUpPage();
+        Faker faker = new Faker();
+        String lastName=faker.name().lastName();
+        String email=faker.name().username().replace(".","")+"@"+faker.internet().domainName();
+        String password=faker.internet().password(8,50,true,true,true);
+        signUpPage.getFirstName().sendKeys(firstName);
+        signUpPage.getLastName().sendKeys(lastName);
+        signUpPage.getEmail().sendKeys(email);
+        signUpPage.getPassword1().sendKeys(password);
+    }
+
+    public void signUpCustomLastName(String lastName){
+        SignUpPage signUpPage = new SignUpPage();
+        Faker faker = new Faker();
+        String firstName=faker.name().firstName();
+        String email=faker.name().username().replace(".","")+"@"+faker.internet().domainName();
+        String password=faker.internet().password(8,50,true,true,true);
+        signUpPage.getFirstName().sendKeys(firstName);
+        signUpPage.getLastName().sendKeys(lastName);
+        signUpPage.getEmail().sendKeys(email);
+        signUpPage.getPassword1().sendKeys(password);
+    }
+
+    public void signUpCustomEmail(String email){
+        SignUpPage signUpPage = new SignUpPage();
+        Faker faker = new Faker();
+        String firstName=faker.name().firstName();
+        String lastName=faker.name().lastName();
+        String password=faker.internet().password(8,50,true,true,true);
+        signUpPage.getFirstName().sendKeys(firstName);
+        signUpPage.getLastName().sendKeys(lastName);
+        signUpPage.getEmail().sendKeys(email);
+        signUpPage.getPassword1().sendKeys(password);
+    }
+
+    public void signUpCustomPassword(String password){
+        SignUpPage signUpPage = new SignUpPage();
+        Faker faker = new Faker();
+        String firstName=faker.name().firstName();
+        String lastName=faker.name().lastName();
+        String email=faker.name().username().replace(".","")+"@"+faker.internet().domainName();
+        signUpPage.getFirstName().sendKeys(firstName);
+        signUpPage.getLastName().sendKeys(lastName);
+        signUpPage.getEmail().sendKeys(email);
+        signUpPage.getPassword1().sendKeys(password);
+    }
+
+
+
 }
 
