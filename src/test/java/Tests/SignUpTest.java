@@ -2,6 +2,8 @@ package Tests;
 
 import Pages.SignUpPage;
 import Utils.Driver;
+import Utils.SeleniumWebTools;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.io.FileWriter;
@@ -39,6 +41,56 @@ public class SignUpTest extends TestBase {
             e.printStackTrace();
         }
     }
+
+
+    @Test
+    public void positiveSignup ()  {
+        Driver.getDriver().findElement(By.linkText("Sign up")).click();
+
+        SignUpPage signUpPage = new SignUpPage();
+        signUpPage.signUp();
+        signUpPage.getRegisterButton().click();
+        Assert.assertTrue(Driver.getDriver().getPageSource().contains("Registration Successful"));
+        new SeleniumWebTools().waitForTitleContains("Login", 3);
+        Assert.assertEquals(Driver.getDriver().getCurrentUrl(), "http://qa-duobank.us-east-2.elasticbeanstalk.com/index.php");
+    }
+
+    @Test
+    public void negativeSignupNoFirstName ()  {
+        Driver.getDriver().findElement(By.linkText("Sign up")).click();
+
+        SignUpPage signUpPage = new SignUpPage();
+        signUpPage.signUpCustomFirstName("");
+        signUpPage.getRegisterButton().click();
+
+        Assert.assertFalse(Driver.getDriver().getPageSource().contains("Registration Successful"));
+    }
+
+    @Test
+    public void negativeSignupLongFirstName () {
+        Driver.getDriver().findElement(By.linkText("Sign up")).click();
+
+        SignUpPage signUpPage = new SignUpPage();
+        signUpPage.signUpCustomFirstName("sfmksadffflsfsjfieowjoiwjefjweoijfowiejfowiejfowiejf");
+        signUpPage.getRegisterButton().click();
+        Assert.assertFalse(Driver.getDriver().getPageSource().contains("Registration Successful"));
+    }
+
+    @Test
+    public void negativeSignupNumbersFirstName () {
+        Driver.getDriver().findElement(By.linkText("Sign up")).click();
+        SignUpPage signUpPage = new SignUpPage();
+        signUpPage.signUpCustomFirstName("12345khkjnh");
+        signUpPage.getRegisterButton().click();
+        Assert.assertFalse(Driver.getDriver().getPageSource().contains("Registration Successful"));
+    }
+
+    @Test
+    public void signUpButtonDisabled () {
+        Driver.getDriver().findElement(By.linkText("Sign up")).click();
+        Assert.assertFalse(new SignUpPage().getSignUpButton().isEnabled());
+    }
+
 }
 
 
