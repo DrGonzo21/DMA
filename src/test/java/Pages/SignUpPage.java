@@ -23,6 +23,12 @@ public class SignUpPage {
     private WebElement password1;
     @FindBy (id = "register")
     private WebElement registerButton;
+    @FindBy (xpath = "//span")
+    private WebElement emailerror;
+
+    public WebElement getEmailerror() {
+        return emailerror;
+    }
 
     public WebElement getSignUpButton() {
         return SignUpButton;
