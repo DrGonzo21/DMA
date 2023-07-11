@@ -22,6 +22,12 @@ public class LoginPage {
     private WebElement username;
     @FindBy (xpath = "//a[@href='logout.php']")
     private WebElement logoutButton;
+    @FindBy (xpath = "//span[@class='menu-title']")
+    private WebElement dashBoardtitle;
+
+    public WebElement getDashBoardtitle() {
+        return dashBoardtitle;
+    }
 
     public WebElement getLogoutButton() {
         return logoutButton;
