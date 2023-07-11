@@ -19,7 +19,8 @@ public class SignupButtonHomepage extends TestBase{
 
 
     @Test
-    public void verifySignupButton()  {
+    public void verifySignupButton() {
+
         SignupButton signup= new SignupButton();
         //Verify “Don't have an account? Sign up” button
         System.out.println(signup.getSignupText().getText());
@@ -27,14 +28,12 @@ public class SignupButtonHomepage extends TestBase{
 
         //Click on Signup button
         signup.getSignupText().click();
+
         String actual = Driver.getDriver().getCurrentUrl();
         //Verify user is redirected to the signup page
         Assert.assertEquals(actual, "http://qa-duobank.us-east-2.elasticbeanstalk.com/index.php");
 
 
 
-
     }
-
-
 }
