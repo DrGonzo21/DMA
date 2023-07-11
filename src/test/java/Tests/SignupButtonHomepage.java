@@ -1,6 +1,8 @@
 package Tests;
 
 import Pages.SignUpPage;
+import Pages.SignupButton;
+import Utils.ConfigReader;
 import Utils.Driver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,51 +16,23 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class SignupButtonHomepage extends TestBase{
-    public SignupButtonHomepage(){
-        PageFactory.initElements(Driver.getDriver(), this); // this line initializes all @FindBy annotated variables
-    }
 
-//    WebDriver driver= new ChromeDriver();
-
-    @FindBy(xpath= "//small[@class='mr-25']")
-    private WebElement signupText;
-
-    @FindBy(xpath= "//a[@href='register.php']")
-    private WebElement signupButton;
 
     @Test
     public void verifySignupButton()  {
-        setUp();
-        Driver.getDriver();
-//        driver.get("http://qa-duobank.us-east-2.elasticbeanstalk.com/index.php");
-
+        SignupButton signup= new SignupButton();
         //Verify “Don't have an account? Sign up” button
-        signupText.getText();
-        signupButton.getText();
+        signup.getSignupText().getText();
+        signup.getSignupButton().getText();
 
         //Click on Signup button
-        signupButton.click();
+        signup.getSignupText().click();
 
         //Verify user is redirected to the signup page
-        Assert.assertEquals(Driver.getDriver().getCurrentUrl(), "http://qa-duobank.us-east-2.elasticbeanstalk.com/register.php");
+        Assert.assertEquals( Driver.getDriver(), "http://qa-duobank.us-east-2.elasticbeanstalk.com/register.php");
 
-        tearDown();
 
     }
 
-    public WebElement getSignupText() {
-        return signupText;
-    }
 
-    public WebElement setSignupText() {
-        return signupText;
-    }
-
-    public WebElement getSignupButton() {
-        return signupButton;
-    }
-
-    public WebElement setSignupButton() {
-        return signupButton;
-    }
 }
