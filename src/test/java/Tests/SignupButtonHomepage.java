@@ -19,20 +19,20 @@ public class SignupButtonHomepage extends TestBase{
 
 
     @Test
-    public void verifySignupButton() throws InterruptedException {
+    public void verifySignupButton() {
 
         SignupButton signup= new SignupButton();
         //Verify “Don't have an account? Sign up” button
-        signup.getSignupText().getText();
-        signup.getSignupButton().getText();
+        System.out.println(signup.getSignupText().getText());
+        System.out.println(signup.getSignupButton().getText());
 
         //Click on Signup button
         signup.getSignupText().click();
-        Thread.sleep(2000);
-        String actual = Driver.getDriver().getCurrentUrl();
 
+        String actual = Driver.getDriver().getCurrentUrl();
         //Verify user is redirected to the signup page
         Assert.assertEquals(actual, "http://qa-duobank.us-east-2.elasticbeanstalk.com/index.php");
+
 
 
     }
