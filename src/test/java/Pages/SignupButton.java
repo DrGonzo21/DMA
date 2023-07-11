@@ -17,6 +17,7 @@ public class SignupButton {
     @FindBy(xpath= "//a[@href='register.php']")
     private WebElement signupButton;
 
+
     public WebElement getSignupText() {
         return signupText;
     }
