@@ -6,35 +6,59 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class SignupButtonHomepage {
+public class SignupButtonHomepage extends TestBase{
+    public SignupButtonHomepage(){
+        PageFactory.initElements(Driver.getDriver(), this); // this line initializes all @FindBy annotated variables
+    }
 
-    WebDriver driver= new ChromeDriver();
+//    WebDriver driver= new ChromeDriver();
+
+    @FindBy(xpath= "//small[@class='mr-25']")
+    private WebElement signupText;
+
+    @FindBy(xpath= "//a[@href='register.php']")
+    private WebElement signupButton;
+
     @Test
-    public void verifySignupButton() {
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.manage().window().maximize();
-        driver.get("http://qa-duobank.us-east-2.elasticbeanstalk.com/index.php");
+    public void verifySignupButton()  {
+        setUp();
+        Driver.getDriver();
+//        driver.get("http://qa-duobank.us-east-2.elasticbeanstalk.com/index.php");
 
         //Verify “Don't have an account? Sign up” button
-        WebElement signupText= driver.findElement(By.xpath("//small[@class='mr-25']"));
-        System.out.println(signupText.getText());
-        WebElement signupButton= driver.findElement(By.xpath("//a[@href='register.php']"));
-        System.out.println(signupButton.getText());
+        signupText.getText();
+        signupButton.getText();
 
         //Click on Signup button
-        driver.findElement(By.xpath("//div[@class='text-center']//a[@href='register.php']")).click();
+        signupButton.click();
 
         //Verify user is redirected to the signup page
-        Assert.assertEquals(driver.getCurrentUrl(), "http://qa-duobank.us-east-2.elasticbeanstalk.com/register.php");
+        Assert.assertEquals(Driver.getDriver().getCurrentUrl(), "http://qa-duobank.us-east-2.elasticbeanstalk.com/register.php");
 
-        driver.quit();
+        tearDown();
 
+    }
 
+    public WebElement getSignupText() {
+        return signupText;
+    }
+
+    public WebElement setSignupText() {
+        return signupText;
+    }
+
+    public WebElement getSignupButton() {
+        return signupButton;
+    }
+
+    public WebElement setSignupButton() {
+        return signupButton;
     }
 }
