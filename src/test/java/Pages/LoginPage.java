@@ -1,6 +1,8 @@
 package Pages;
 
+import Utils.ConfigReader;
 import Utils.Driver;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -23,11 +25,23 @@ public class LoginPage {
     @FindBy (xpath = "//a[@href='logout.php']")
     private WebElement logoutButton;
 
+@FindBy (xpath = "//div[@class='user-nav d-sm-flex d-none']//span[ @class='user-name']")
+private WebElement userNameDisplayed;
+
+    public WebElement getUserNameDisplayed() {
+        return userNameDisplayed;
+    }
+
+
+public void validLogIn(){
+        emailAddress.sendKeys(ConfigReader.getProperty("valid"), Keys.TAB, ConfigReader.getProperty("passcode"),Keys.ENTER);
+}
+
     public WebElement getLogoutButton() {
         return logoutButton;
     }
 
-    public WebElement getUsername() {
+    public  WebElement getUsername() {
         return username;
     }
 
