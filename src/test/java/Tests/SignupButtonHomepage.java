@@ -27,9 +27,11 @@ public class SignupButtonHomepage extends TestBase{
 
         //Click on Signup button
         signup.getSignupText().click();
-
+        String actual = Driver.getDriver().getCurrentUrl();
         //Verify user is redirected to the signup page
-        Assert.assertEquals( Driver.getDriver().getCurrentUrl(), "http://qa-duobank.us-east-2.elasticbeanstalk.com/index.php");
+        Assert.assertEquals(actual, "http://qa-duobank.us-east-2.elasticbeanstalk.com/index.php");
+
+
 
 
     }
