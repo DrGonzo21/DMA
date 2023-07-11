@@ -21,15 +21,9 @@ public class SignupButton {
         return signupText;
     }
 
-    public WebElement setSignupText() {
-        return signupText;
-    }
 
     public WebElement getSignupButton() {
         return signupButton;
     }
 
-    public WebElement setSignupButton() {
-        return signupButton;
-    }
 }
