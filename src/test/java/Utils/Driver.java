@@ -1,36 +1,50 @@
 package Utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class Driver {
-    private static WebDriver driver;
-
+    private static ThreadLocal<WebDriver> drivers = new ThreadLocal<>();
     private Driver(){}
 
     public static WebDriver getDriver(){
-        if(driver == null){  // if the driver object is not initialized, initialize it
+        if(drivers.get() == null){  // if the driver object is not initialized, initialize it
 
-            // read the browser from config file
-            String browser = ConfigReader.getProperty("browser").toLowerCase();
+            String browser = System.getProperty("browser");  // read the browser from command line and assign it to browser
+
+            if(browser == null) {  // if nothing was passed from command line
+                browser = ConfigReader.getProperty("browser").toLowerCase(); // use the browser from config.properties
+            }
 
             switch (browser) {
-                case "chrome" -> driver = new ChromeDriver();
-                case "edge" -> driver = new EdgeDriver();
-                case "firefox" -> driver = new FirefoxDriver();
-                case "safari" -> driver = new SafariDriver();
+                case "chrome" -> drivers.set(new ChromeDriver());
+                case "edge" -> drivers.set(new EdgeDriver());
+                case "firefox" -> drivers.set(new FirefoxDriver());
+                case "chromeheadless" -> drivers.set(new ChromeDriver(new ChromeOptions().addArguments("--headless")));
+                case "edgeheadless" -> drivers.set(new EdgeDriver(new EdgeOptions().addArguments("--headless")));
+                case "firefoxheadless" -> drivers.set(new FirefoxDriver(new FirefoxOptions().addArguments("--headless")));
+                case "safari" -> drivers.set(new SafariDriver());
                 default -> throw new IllegalArgumentException(browser + " -> this browser is not supported or invalid");
             }
+
+
         }
-        return driver; // otherwise return the initialized driver object
+
+        return drivers.get(); // otherwise return the initialized driver object
     }
-    public static void quitDriver(){
-        if(driver != null){
-            driver.quit();
-            driver = null;
+
+    public static synchronized void quitDriver(){
+        if(drivers.get() != null){
+            drivers.get().quit();
+            drivers.remove();
         }
+
     }
+
 }
 
