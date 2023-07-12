@@ -12,7 +12,7 @@ public class Driver {
     private static ThreadLocal<WebDriver> drivers = new ThreadLocal<>();
     private Driver(){}
 
-    public static WebDriver getDriver(){
+    public static synchronized WebDriver getDriver(){
         if(drivers.get() == null){  // if the driver object is not initialized, initialize it
 
             String browser = System.getProperty("browser");  // read the browser from command line and assign it to browser
