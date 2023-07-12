@@ -25,7 +25,7 @@ public class TestBase {
         String pathToHtmlFile = System.getProperty("user.dir")+"/target/ExtentReports/report.html";
         htmlReport = new ExtentSparkReporter(pathToHtmlFile);
         report.attachReporter(htmlReport);
-        report.setSystemInfo("Project Name", "Web Orders Automation Tests");
+        report.setSystemInfo("Project Name", "Duobank Mortgage Application");
         report.setSystemInfo("SDET", "Team A");
         report.setSystemInfo("Environment", ConfigReader.getProperty("env"));
         report.setSystemInfo("Operating System", System.getProperty("os.name"));
