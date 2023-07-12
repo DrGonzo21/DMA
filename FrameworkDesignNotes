@@ -1,0 +1,133 @@
+TDD(Test Driven Development) Framework - TestNG or JUnit based framework that uses @Test annotations to create tests
+
+Steps of creating TestNG based framework from scratch:
+1. Create a maven project
+2. Add project specific dependencies
+3. Add .gitignore
+4. Create the package structure
+5. Add TestBase and necessary test classes (don't forget to extend your test classes from TestBase)
+6. Add testng.xml file to configure different test runs
+7. Add .properties file with project specific global properties like urls, username, passwords ,etc.
+   (never hardcode properties like urls, passwords, api keys into the code, rather use properties file)
+8. Add the utility class to read from the property file (ConfigReader)
+9. Add the Driver utility class that is implemented using Singleton design pattern
+10. Add Selenium Utility class for re-usable selenium methods and add more methods as needed as you progress in your progress
+11. Start creating the Page classes for each page of the application and add the WebElements and related methods
+11. Create test cases using the Page classes and their methods according to Page Object Model design pattern
+12. Add a support for running tests through CMD by configuring the Maven Surefire plugin in pom.xml
+
+
+13. Add Extent report dependency and configure Test Base class for the report generation
+14. Configure the Driver class to add headless browser options for each browser
+15. Add a support for Cross-Browser testing
+16. Add a support for Parallel Testing
+
+
+
+
+Singleton Design Pattern -> A design pattern where an instantiation of a class is restricted to only one object.
+                           An example could be the Driver class where the Webdriver instantiation is done by getDriver() method that checks if the WebDriver obj is already initialized.
+                           The purpose of using this pattern is to prevent multiple WebDriver objects being initialized.
+
+Page Object Model Design Pattern -> A design pattern specific to Selenium based UI test frameworks which is implemented by creating a separate class for each page of our
+                                    application which stores the page web elements and methods.
+                                    The purpose is re-usability, maintainability and readability.
+PageFactory class ->      This style uses @FindBy annotations to locate the elements and makes our Page classes more readable and concise.
+                                   We implement it by using PageFactory.initElements() method in a constructor of the page class
+                                   We also can use @FindBys to create chained matches and @FindAll to match multiple webelements on the page
+
+To run tests thru CMD in TestNG framework:
+
+1. Add Maven Surefire plugin to the pom.xml
+2. Configure it to run different xml files.
+   Add the following configuration:
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <configuration>
+                        <suiteXmlFiles>
+                            <suiteXmlFile>${xmlFile}</suiteXmlFile>   // syntax for the name of the placeholder -> ${placeholderName}
+                        </suiteXmlFiles>
+                    </configuration>
+                </plugin>
+3. In the command line run the tests with the -D switch, indicating the value for placeholder:
+         mvn test -D xmlFile=regression-suite.xml
+   or    mvn test -D xmlFile=smoke-test-suite.xml
+
+
+
+TestNG based TDD framework components:
+
+Java - write framework code
+Maven - run the test cases from command line, building the project, defining the framework structure, manage dependencies
+TestNG - run the test cases, organize the TDD framework via annotations, configure and organize test case runs through xml files
+IntelliJ - write the test cases, test them, fix the errors, speed up and streamline the development process
+Git/GitHub - version control the code, collaborate with others
+Selenium - interact with the web pages, to create UI test cases
+Java Faker - provides mock data to our tests
+properties file - store the project's key global information such as environment variables, usernames, passwords, API keys. Prevent exposing sensitive data
+gitignore file - prevent files/folders from being committed into GitHub
+utility classes - store common reusable methods that are used framework
+testbase class - store the common setup and teardown configuration actions for tests
+singleton design pattern - make the WebDriver object a single object during the execution and prevent multiple instantiation
+page object model design pattern - make the page related code, such as finding and interacting with webelements, maintainable and scalable
+page factory class - make the page object model code more readable and shorter through @FindBy annotations
+maven surefire plugin - configure how to run the tests from command file
+
+
+How to run the test cases in our framework?
+
+mvn test -D xmlFile=nameOfXmlFile.xml
+or
+mvn clean test -D xmlFile=nameOfXmlFile.xml
+
+
+Headless Browser testing is running tests in a headless browser to speed up the test execution time. Another use case is when runnin tests in
+remote linux servers that do not have GUI, running them in headless mode is the only option
+
+
+Cross-Browser Testing - Cross-browser testing involves testing web applications on multiple web browsers, such as Chrome, Firefox, Safari, and Edge, to ensure that the application behaves consistently across different browsers.
+This is important because different browsers may interpret HTML, CSS, and JavaScript differently, which can lead to inconsistencies in the application's behavior.
+Cross-browser testing helps to ensure that the application works as expected on all major browsers, improving the user experience and reducing the risk of bugs and errors.
+
+How did you implement Cross-browser testing in your framework?
+We implement it in our framework by passing the browser type through command line like: mvn test -D browser=chrome
+                                     And we simply execute multiple commands for different browser types
+                                     We can use batch file/shell script file to execute all commands at once
+
+
+Parallel Testing:
+Parallel testing involves running multiple automated tests simultaneously on separate browsers.
+This approach can help to speed up the testing process, as multiple tests can be executed at the same time, rather than waiting for each test to finish before starting the next one.
+Parallel testing is especially useful when dealing with large test suites like regression suite that takes a long time to run.
+  Parallel Tests - running groups of tests in parallel to reduce execution time and get faster feedback
+                     How to implement:
+                     1. Setup Selenium Grid with Hub and multiple nodes and direct your tests to the central Hub which automatically distributes
+                        the tests among nodes.
+                        Pros: More scalable, reliable, little maintenance after initial setup.
+                        Cons: Complex to setup, can be more costly than native setup, especially when using third party cloud services
+                               such as SauceLabs, BrowserStack.
+                     2. Setup natively through TestNG xml file.
+                        a)Add parallel attribute to <suite> tag along with thread-count attribute where you indicate the amount of threads
+                        Default thread-count is 5 if not given.
+                        Parallel attribute can take methods, classes and tests.
+                        2)Adjust the singleton Driver class with ThreadLocal<WebDriver> to give each thread its own WebDriver,
+                           And we made the initialization and quitting methods of drivers synchronized
+In Java, synchronization refers to the process of controlling the access of multiple threads to shared resources, such as variables, methods, or blocks of code.
+When multiple threads access shared resources simultaneously, it can lead to race conditions, data inconsistency, and other problems.
+Synchronization ensures that your code is thread-safe and only one thread at a time can access the shared resources, preventing these issues. In Java methods and code blocks can be synchronized.
+
+
+
+
+
+
+
+Regression Test Suite: A regression test suite is a collection of automated tests that are designed to verify that changes or updates to an application have not introduced any new defects or bugs.
+Regression tests are typically run after a new feature or a major bug fix has been implemented, to ensure that the existing functionality of the application has not been impacted.
+Regression tests are usually more comprehensive and cover a larger area of the application compared to other types of tests, as they need to ensure that the application is still functioning correctly even after changes have been made.
+
+Smoke Test Suite: A smoke test suite is a set of basic, high-level tests that are designed to quickly verify that the major functionalities of an application are working as expected.
+Smoke tests are usually run after a new build or release of an application to ensure that the application is stable enough to proceed with further testing.
+Smoke tests are typically run first and quickly to catch any major issues before running more comprehensive tests.

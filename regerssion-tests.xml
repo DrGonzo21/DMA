@@ -4,7 +4,7 @@ DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
     <test name="All Tests">
 
         <packages>
-            <package name="Tests"/>
+            <package name="tests"/>
         </packages>
 
     </test>
