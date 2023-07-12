@@ -26,6 +26,12 @@ public class LoginPage {
     private WebElement logoutButton;
     @FindBy (xpath = "//span[@class='menu-title']")
     private WebElement dashBoardtitle;
+    @FindBy (xpath = "//a[@href='mortgage.php']")
+        private WebElement mortgageApp;
+
+    public WebElement getMortgageApp() {
+        return mortgageApp;
+    }
 
     public WebElement getDashBoardtitle() {
         return dashBoardtitle;
