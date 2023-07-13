@@ -1,4 +1,4 @@
-package Pages;
+package JerrodPages;
 
 import Utils.Driver;
 import org.openqa.selenium.By;

@@ -1,8 +1,8 @@
 package Tests;
 
 import Pages.ExpensesPage;
-import Pages.JPersonalInfo;
-import Pages.JpreApproval;
+import JerrodPages.JPersonalInfo;
+import JerrodPages.JpreApproval;
 import Pages.LoginPage;
 import Utils.Driver;
 import com.github.javafaker.Faker;
