@@ -1,7 +1,6 @@
 package Pages;
 
 import Utils.Driver;
-import com.github.javafaker.Faker;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -29,6 +28,12 @@ public class ExpensesPage {
     private WebElement previousbutton;
       @FindBy (xpath = "//a[@href='#finish']")
     private WebElement savebutton;
+      @FindBy (xpath = "//label[@id='firtmortagagetotalpayment-error']")
+      private WebElement mortgagepaymenterror;
+
+    public WebElement getMortgagepaymenterror() {
+        return mortgagepaymenterror;
+    }
 
     public WebElement getMonthlypaymenterror() {
         return monthlypaymenterror;

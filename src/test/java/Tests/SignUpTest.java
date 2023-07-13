@@ -1,5 +1,6 @@
 package Tests;
 
+import Pages.LoginPage;
 import Pages.SignUpPage;
 import Utils.Driver;
 import Utils.SeleniumWebTools;
@@ -89,6 +90,18 @@ public class SignUpTest extends TestBase {
     public void signUpButtonDisabled () {
         Driver.getDriver().findElement(By.linkText("Sign up")).click();
         Assert.assertFalse(new SignUpPage().getSignUpButton().isEnabled());
+    }
+    @Test
+    public void verifyAlreadyHaveAccount(){
+
+        SignUpPage signup = new SignUpPage();
+        signup.getSignUpButton().click();
+        String actual = signup.getAlreadyHaveAccount().getText();
+        String expected = "Already have an account?";
+       Assert.assertEquals(actual,expected);
+        System.out.println(actual);
+        System.out.println(expected);
+
     }
 
 }

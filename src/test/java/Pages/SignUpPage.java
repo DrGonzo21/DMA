@@ -25,6 +25,12 @@ public class SignUpPage {
     private WebElement registerButton;
     @FindBy (xpath = "//span")
     private WebElement emailerror;
+    @FindBy (xpath = "//small[@class='mr-25']")
+    private WebElement AlreadyHaveAccount;
+
+    public WebElement getAlreadyHaveAccount() {
+        return AlreadyHaveAccount;
+    }
 
     public WebElement getEmailerror() {
         return emailerror;
@@ -54,7 +60,7 @@ public class SignUpPage {
         return registerButton;
     }
     public String getRandomEmail() {
-        String generatedString = RandomStringUtils.randomAlphabetic(8).toLowerCase();
+        String generatedString = RandomStringUtils.randomAlphabetic(10).toLowerCase();
         return generatedString + "@example.com";
     }
 
