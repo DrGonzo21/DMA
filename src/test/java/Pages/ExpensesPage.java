@@ -1,6 +1,7 @@
 package Pages;
 
 import Utils.Driver;
+import com.github.javafaker.Faker;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -12,13 +13,15 @@ public class ExpensesPage {
         }
         @FindBy (xpath = "//label[@id='monthlyrentalpayment-error']")
                 private WebElement monthlypaymenterror;
-        @FindBy (xpath = "//input[@id='expense1']")
+        @FindBy (xpath = "//label[@for='expense1']")
                 private WebElement rentcheckbox;
-        @FindBy(xpath = "//input[@id='expense2']")
+        @FindBy(xpath = "//label[@for='expense2']")
     private WebElement owncheckbox;
         @FindBy (xpath = "//input[@id='monthlyrentalpayment']")
-     private WebElement monthlyMortgagepayment;
-      @FindBy (xpath = "//label[@for='firtmortagagetotalpayment']")
+     private WebElement rentalpayment;
+        @FindBy (xpath = "//input[@id='firtmortagagetotalpayment']")
+            private WebElement Mortgagepayment;
+    @FindBy (xpath = "//label[@for='firtmortagagetotalpayment']")
     private WebElement mortgagepaymentlabel;
       @FindBy (xpath = "//label[@for='monthlyrentalpayment'][1]")
     private WebElement monthlypaymentlabel;
@@ -39,8 +42,8 @@ public class ExpensesPage {
         return owncheckbox;
     }
 
-    public WebElement getMonthlyMortgagepayment() {
-        return monthlyMortgagepayment;
+    public WebElement getRentalpayment() {
+        return rentalpayment;
     }
 
     public WebElement getMortgagepaymentlabel() {
@@ -57,6 +60,9 @@ public class ExpensesPage {
 
     public WebElement getSavebutton() {
         return savebutton;
+    }
+    public WebElement getMortgagepayment() {
+        return Mortgagepayment;
     }
 }
 
