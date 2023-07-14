@@ -1,24 +1,35 @@
 package Tests;
 
-import Pages.ExpensesPage;
 import JerrodPages.JPersonalInfo;
 import JerrodPages.JpreApproval;
+import Pages.ExpensesPage;
 import Pages.LoginPage;
 import Utils.Driver;
 import com.github.javafaker.Faker;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class ExpensesTest extends TestBase {
 
         Faker faker = new Faker();
+        @DataProvider(name = "customers", parallel = true)
+        public Object[][] provideCustomerData() {
 
-        @Test(groups = {"smoke"})
-        public void validTestRenting() {
+                Object[][] data = {
+                        {"123123@example.com", "123"},
+                        {"fnilleqc@example.com", "sh55h5J0"},
+                        {"zxmluewd@example.com", "Xp1AVIkP"}
+                };
+                return data;
+        }
+
+        @Test(groups = {"smoke"}, dataProvider = "customers")
+        public void validTestRenting(String email, String password) {
 
                 LoginPage login = new LoginPage();
-                login.getEmailAddress().sendKeys("123123@example.com");
-                login.getPassword().sendKeys("123");
+                login.getEmailAddress().sendKeys(email);
+                login.getPassword().sendKeys(password);
                 login.getSignInButton().click();
                 login.getMortgageApp().click();
                 JpreApproval approve = new JpreApproval();
@@ -43,7 +54,7 @@ public class ExpensesTest extends TestBase {
                 Assert.assertEquals(Driver.getDriver().getCurrentUrl(), dashboardurl);
         }
 
-        @Test
+        @Test(dataProvider = "customers")
         public void validTestOwning(String email, String password) throws InterruptedException {
 
                 LoginPage login = new LoginPage();
@@ -75,12 +86,12 @@ public class ExpensesTest extends TestBase {
                 Assert.assertEquals(Driver.getDriver().getCurrentUrl(), dashboardUrl);
         }
 
-        @Test(groups = {"smoke"})
-        public void MonthlyRentalNonNumeric() throws InterruptedException {
+        @Test(groups = {"smoke"}, dataProvider = "customers")
+        public void MonthlyRentalNonNumeric(String email, String password) throws InterruptedException {
 
                 LoginPage login = new LoginPage();
-                login.getEmailAddress().sendKeys("123123@example.com");
-                login.getPassword().sendKeys("123");
+                login.getEmailAddress().sendKeys(email);
+                login.getPassword().sendKeys(password);
                 login.getSignInButton().click();
                 login.getMortgageApp().click();
                 JpreApproval approve = new JpreApproval();
@@ -107,12 +118,12 @@ public class ExpensesTest extends TestBase {
                 System.out.println("Expected Error Message: " + expectedErrorMessage);
                 Assert.assertTrue(actualErrorMessage.trim().contains(expectedErrorMessage.trim()));
         }
-        @Test
-        public void MonthlyRentalnovalue() throws InterruptedException {
+        @Test(dataProvider = "customers")
+        public void MonthlyRentalnovalue(String email, String password) throws InterruptedException {
 
                 LoginPage login = new LoginPage();
-                login.getEmailAddress().sendKeys("123123@example.com");
-                login.getPassword().sendKeys("123");
+                login.getEmailAddress().sendKeys(email);
+                login.getPassword().sendKeys(password);
                 login.getSignInButton().click();
                 login.getMortgageApp().click();
                 JpreApproval approve = new JpreApproval();
@@ -140,12 +151,12 @@ public class ExpensesTest extends TestBase {
                 System.out.println("Expected Error Message: " + expectedErrorMessage);
                 Assert.assertTrue(actualErrorMessage.trim().contains(expectedErrorMessage.trim()));
         }
-        @Test
-        public void MortgageRentalnovalue() throws InterruptedException {
+        @Test(dataProvider = "customers")
+        public void MortgageRentalnovalue(String email, String password) throws InterruptedException {
 
                 LoginPage login = new LoginPage();
-                login.getEmailAddress().sendKeys("123123@example.com");
-                login.getPassword().sendKeys("123");
+                login.getEmailAddress().sendKeys(email);
+                login.getPassword().sendKeys(password);
                 login.getSignInButton().click();
                 login.getMortgageApp().click();
                 JpreApproval approve = new JpreApproval();
