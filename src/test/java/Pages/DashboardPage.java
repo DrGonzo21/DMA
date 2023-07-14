@@ -22,13 +22,23 @@ public class DashboardPage {
 
     @FindBy(xpath = "//a[@href='mortgage.php']")
     private WebElement mortgageApplication;
+
     @FindBy(xpath = "//div[@class='brand-logo']")
-    private WebElement bankLogo;
+    private WebElement bankIcon;
+
+    @FindBy(xpath = " //h2[@class='brand-text mb-0'] ")
+    private WebElement bankNameLogo;
 
 
 
-    public WebElement getBankLogo() {
-        return bankLogo;
+
+
+    public WebElement getBankNameLogo() {
+        return bankNameLogo;
+    }
+
+    public WebElement getBankIcon() {
+        return bankIcon;
     }
 
     public WebElement getMortgageApplication() {
