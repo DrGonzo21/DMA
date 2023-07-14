@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class LoginTest extends TestBase {
+
     @Test
     public void LoginTest() {
         LoginPage login = new LoginPage();
