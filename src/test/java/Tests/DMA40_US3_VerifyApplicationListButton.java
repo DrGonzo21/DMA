@@ -1,11 +1,10 @@
 package Tests;
 
 import Pages.DashboardPage;
-import Utils.Driver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class DMA39_US3_VerifyMortgageAppButton extends TestBase {
+public class DMA40_US3_VerifyApplicationListButton extends TestBase {
 @Test
     public void verifyMortgageApplicationLink(){
 
