@@ -22,6 +22,17 @@ public class DMA37_US3_VerifyDashboardPage extends TestBase{
         Assert.assertEquals(actualBankName, expectedBankName);
     }
 
+   @Test
+       public void verifyDashboardTitle(){
+       DashboardPage title = new DashboardPage();
+       String expectedTitle = "Dashboard";
+String actualTitle = title.getDashboardTitle().getText();
+Assert.assertEquals(actualTitle, expectedTitle, "Title is NOT Dashboard");
+    }
+
+
+
+
     @Test
     public void verifyURL() throws IOException {
 
@@ -29,7 +40,7 @@ public class DMA37_US3_VerifyDashboardPage extends TestBase{
             DashboardPage url = new DashboardPage();
             String actualUrl = Driver.getDriver().getCurrentUrl();
             String expectedUrl = "http://qa-duobank.us-east-2.elasticbeanstalk.com/dashboard.php";
-            Assert.assertEquals(actualUrl, expectedUrl, "You are not on the Dashboard Page");//this is a bug
+            Assert.assertEquals(actualUrl, expectedUrl, "You are not on the Dashboard Page");
 
 
 

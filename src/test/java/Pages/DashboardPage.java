@@ -15,7 +15,7 @@ public class DashboardPage {
         login.getEmailAddress().sendKeys(ConfigReader.getProperty("valid")  );
         login.getPassword().sendKeys(ConfigReader.getProperty("passcode"));
         login.getSignInButton().click();
-        login.getMortgageApp().click();
+
             }
 
 
@@ -29,9 +29,12 @@ public class DashboardPage {
     @FindBy(xpath = " //h2[@class='brand-text mb-0'] ")
     private WebElement bankNameLogo;
 
+    @FindBy (xpath = "//span[@class='menu-title']")
+    private WebElement  dashboardTitle;
 
-
-
+    public WebElement getDashboardTitle() {
+        return dashboardTitle;
+    }
 
     public WebElement getBankNameLogo() {
         return bankNameLogo;
