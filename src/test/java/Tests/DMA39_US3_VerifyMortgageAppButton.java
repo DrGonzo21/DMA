@@ -9,9 +9,10 @@ public class DMA39_US3_VerifyMortgageAppButton extends TestBase {
     public void verifyMortgageApplicationLink(){
 
         DashboardPage  mortgageLink = new DashboardPage();
-        String actualButtonText =  mortgageLink.getMortgageApplicationButton().getText();
+        String actualButtonText =  mortgageLink.getMortgageApplication().getText();
         String expectedButtonText = "Mortgage Application";
         Assert.assertEquals(actualButtonText,expectedButtonText, "Button name does not match");
+
 
     }
 }
