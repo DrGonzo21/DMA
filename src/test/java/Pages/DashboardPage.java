@@ -23,6 +23,7 @@ public class DashboardPage {
     @FindBy(xpath = "//a[@href='mortgage.php']")
     private WebElement mortgageApplication;
 
+
     @FindBy(xpath = "//div[@class='brand-logo']")
     private WebElement bankIcon;
 
@@ -31,6 +32,13 @@ public class DashboardPage {
 
     @FindBy (xpath = "//span[@class='menu-title']")
     private WebElement  dashboardTitle;
+
+    @FindBy(xpath = "//span[@class='menu-item'][contains(text(), \"Application List\")]")
+    private WebElement applicationListButton;
+
+    public WebElement getApplicationListButton() {
+        return applicationListButton;
+    }
 
     public WebElement getDashboardTitle() {
         return dashboardTitle;
