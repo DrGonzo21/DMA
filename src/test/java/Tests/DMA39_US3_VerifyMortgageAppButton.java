@@ -14,6 +14,5 @@ public class DMA39_US3_VerifyMortgageAppButton extends TestBase {
         String expectedButtonText = "Mortgage Application";
         Assert.assertEquals(actualButtonText,expectedButtonText, "Button name does not match");
 
-
     }
 }
