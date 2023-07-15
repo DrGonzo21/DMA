@@ -5,7 +5,7 @@ import Utils.Driver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class DMA39_US3_VerifyMortgageAppLink extends TestBase {
+public class DMA39_US3_VerifyMortgageAppButton extends TestBase {
 @Test
     public void verifyMortgageApplicationLink(){
 
