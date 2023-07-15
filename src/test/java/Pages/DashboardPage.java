@@ -55,6 +55,16 @@ public class DashboardPage {
     public WebElement getMortgageApplication() {
         return mortgageApplication;
     }
+
+    public boolean isButtonVisible(WebElement button){
+        return button.isDisplayed();
+    }
+
+    public boolean isButtonEnabled(WebElement button){
+        return button.isEnabled();
+    }
+
+
 }
 
 
