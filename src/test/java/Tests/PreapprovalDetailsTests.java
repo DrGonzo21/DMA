@@ -1,9 +1,11 @@
 package Tests;
+import Utils.CSVReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import Pages.LoginPage;
 import Pages.PreapprovalDetailsPage;
@@ -12,7 +14,13 @@ import Utils.Driver;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PreapprovalDetailsTests {
+public class PreapprovalDetailsTests extends TestBase{
+
+    @DataProvider(name = "realtor")
+    public Object [][] getData(){
+
+        return CSVReader.readFromCSVFile("realtor.csv");
+    }
     @Test
     public void workingWithRealtorOptions() {
         LoginPage loginPage = new LoginPage();
@@ -24,15 +32,15 @@ public class PreapprovalDetailsTests {
 
     }
 
-    @Test
-    public void hasRealtorEnterInfo() {
+    @Test(dataProvider = "realtor")
+    public void hasRealtorEnterInfo(String realtorInfo) {
         LoginPage loginPage = new LoginPage();
         loginPage.loginWithValidCredentials();
         PreapprovalDetailsPage preapprovalDetailsPage = new PreapprovalDetailsPage();
         preapprovalDetailsPage.getPApage();
         preapprovalDetailsPage.getHasRealtor().click();
         Assert.assertTrue(preapprovalDetailsPage.getRealtorInfo().isEnabled());
-        preapprovalDetailsPage.getRealtorInfo().sendKeys("John Smith, 412-123-1234, john@gmail.com");
+        preapprovalDetailsPage.getRealtorInfo().sendKeys(realtorInfo);
     }
 
     @Test
@@ -48,16 +56,15 @@ public class PreapprovalDetailsTests {
         Assert.assertFalse(preapprovalDetailsPage.getNextPage().isDisplayed());
     }
 
-    @Test
-    public void NoRealtorEnterInfo() {
+    @Test(dataProvider = "realtor")
+    public void NoRealtorEnterInfo(String realtorInfo) {
         LoginPage loginPage = new LoginPage();
         loginPage.loginWithValidCredentials();
         PreapprovalDetailsPage preapprovalDetailsPage = new PreapprovalDetailsPage();
         preapprovalDetailsPage.getPApage();
         preapprovalDetailsPage.getNoRealtor().click();
-        String expected = "John Smith, 412-123-1234, john@gmail.com";
-        preapprovalDetailsPage.getRealtorInfo().sendKeys(expected);
-        Assert.assertNotEquals(preapprovalDetailsPage.getRealtorInfo().getText(), expected);
+        preapprovalDetailsPage.getRealtorInfo().sendKeys(realtorInfo);
+        Assert.assertNotEquals(preapprovalDetailsPage.getRealtorInfo().getText(), realtorInfo);
     }
 
     @Test
