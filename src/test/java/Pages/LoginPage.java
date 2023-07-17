@@ -64,4 +64,12 @@ public class LoginPage {
     public void validLogIn() {
         emailAddress.sendKeys(ConfigReader.getProperty("valid"), Keys.TAB, ConfigReader.getProperty("passcode"), Keys.ENTER);
     }
+    public void loginWithValidCredentials(){
+        login(ConfigReader.getProperty("email"),ConfigReader.getProperty("password"));
+    }
+    public void login(String email, String password){
+        emailAddress.sendKeys(email, Keys.TAB, password, Keys.ENTER);
+    }
+
+
 }

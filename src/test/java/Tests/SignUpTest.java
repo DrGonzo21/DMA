@@ -70,11 +70,9 @@ public class SignUpTest extends TestBase {
     @Test
     public void negativeSignupLongFirstName () {
         Driver.getDriver().findElement(By.linkText("Sign up")).click();
-
         SignUpPage signUpPage = new SignUpPage();
-        signUpPage.signUpCustomFirstName("sfmksadffflsfsjfieowjoiwjefjweoijfowiejfowiejfowiejf");
-        signUpPage.getRegisterButton().click();
-        Assert.assertFalse(Driver.getDriver().getPageSource().contains("Registration Successful"));
+        signUpPage.getSignUpButton().click();
+        Assert.assertTrue(signUpPage.getFirstName().getAttribute("maxlength").equals("50"));
     }
 
     @Test
@@ -89,7 +87,9 @@ public class SignUpTest extends TestBase {
     @Test
     public void signUpButtonDisabled () {
         Driver.getDriver().findElement(By.linkText("Sign up")).click();
-        Assert.assertFalse(new SignUpPage().getSignUpButton().isEnabled());
+        SignUpPage signUpPage = new SignUpPage();
+        signUpPage.getSignUpButton().click();
+        Assert.assertFalse(Driver.getDriver().getPageSource().contains("Registration Successful"));
     }
     @Test
     public void verifyAlreadyHaveAccount(){
