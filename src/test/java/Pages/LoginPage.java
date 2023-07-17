@@ -1,6 +1,7 @@
 package Pages;
 import Utils.ConfigReader;
 import Utils.Driver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +17,7 @@ public class LoginPage {
     private WebElement password;
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement signInButton;
-    @FindBy(xpath = "//a[@href='mortgage.php']")
+    @FindBy(xpath = "//span[@class='menu-item'][1]")
     private WebElement mortgageApp;
     @FindBy(xpath = "//a[@class='dropdown-toggle nav-link dropdown-user-link']")
     private WebElement username;
