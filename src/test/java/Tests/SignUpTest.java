@@ -44,7 +44,7 @@ public class SignUpTest extends TestBase {
     }
 
 
-    @Test
+    @Test(groups = {"smoke"})
     public void positiveSignup ()  {
         Driver.getDriver().findElement(By.linkText("Sign up")).click();
 
