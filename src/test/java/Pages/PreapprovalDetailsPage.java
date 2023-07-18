@@ -53,6 +53,36 @@ public class PreapprovalDetailsPage {
     @FindBy(xpath = "//label[@for='proposalTitle1']")
     private WebElement nextPage;
 
+    @FindBy(id = "estimatedprice-error")
+    private WebElement estPriceError;
+
+    @FindBy(id = "downpayment-error")
+    private WebElement downPmntError;
+
+
+    @FindBy(id = "additionalfunds-error")
+    private WebElement additionalFundsError;
+
+
+    @FindBy(id = "downpaymentpercentage-error")
+    private WebElement downPmntPercentageError;
+
+    public WebElement getAdditionalFundsError() {
+        return additionalFundsError;
+    }
+
+    public WebElement getDownPmntPercentageError() {
+        return downPmntPercentageError;
+    }
+
+    public WebElement getDownPmntError() {
+        return downPmntError;
+    }
+
+    public WebElement getEstPriceError() {
+        return estPriceError;
+    }
+
     public WebElement getNextPage() {
         return nextPage;
     }

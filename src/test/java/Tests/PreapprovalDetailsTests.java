@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import Pages.LoginPage;
 import Pages.PreapprovalDetailsPage;
 import Utils.Driver;
+import org.openqa.selenium.Alert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +86,7 @@ public class PreapprovalDetailsTests extends TestBase{
         PreapprovalDetailsPage preapprovalDetailsPage = new PreapprovalDetailsPage();
         preapprovalDetailsPage.getPApage();
 
-        List<String> optionsExpected = List.of("Purchase a home", "Refinance", "Construction");
+        List<String> optionsExpected = List.of("Purchase a Home", "Refinance", "Construction");
         List<WebElement> elements = new Select(preapprovalDetailsPage.getLoanPurpose()).getOptions();
 
 
@@ -132,7 +133,9 @@ public class PreapprovalDetailsTests extends TestBase{
         preapprovalDetailsPage.getPApage();
         String price = "10000.55555555";
         preapprovalDetailsPage.getEstPrice().sendKeys(price, Keys.TAB);
-        Assert.assertNotEquals(preapprovalDetailsPage.getEstPrice().getAttribute("value"), price);
+        Alert alert = Driver.getDriver().switchTo().alert();
+        alert.accept();
+        Assert.assertTrue(preapprovalDetailsPage.getEstPriceError().isDisplayed());
 
     }
 
@@ -170,8 +173,8 @@ public class PreapprovalDetailsTests extends TestBase{
         PreapprovalDetailsPage preapprovalDetailsPage = new PreapprovalDetailsPage();
         preapprovalDetailsPage.getPApage();
         String price = "10000.55555555";
-        preapprovalDetailsPage.getEstPrice().sendKeys(price);
-        Assert.assertNotEquals(preapprovalDetailsPage.getEstPrice().getAttribute("value"), price);
+        preapprovalDetailsPage.getDownPayment().sendKeys(price, Keys.TAB);
+        Assert.assertTrue(preapprovalDetailsPage.getDownPmntError().isDisplayed());
 
     }
 
@@ -181,7 +184,7 @@ public class PreapprovalDetailsTests extends TestBase{
         loginPage.loginWithValidCredentials();
         PreapprovalDetailsPage preapprovalDetailsPage = new PreapprovalDetailsPage();
         preapprovalDetailsPage.getPApage();
-        preapprovalDetailsPage.getEstPrice().sendKeys("10000", Keys.TAB);
+        preapprovalDetailsPage.getEstPrice().sendKeys("10000");
         String downPmnt = "1000.55";
         preapprovalDetailsPage.getDownPayment().sendKeys(downPmnt, Keys.TAB);
         Assert.assertEquals(preapprovalDetailsPage.getDownPayment().getAttribute("value"), downPmnt);
@@ -207,10 +210,10 @@ public class PreapprovalDetailsTests extends TestBase{
         loginPage.loginWithValidCredentials();
         PreapprovalDetailsPage preapprovalDetailsPage = new PreapprovalDetailsPage();
         preapprovalDetailsPage.getPApage();
-        preapprovalDetailsPage.getEstPrice().sendKeys("10000", Keys.TAB);
+        preapprovalDetailsPage.getEstPrice().sendKeys("10000");
         String downPmntPercent = "10.55555";
-        preapprovalDetailsPage.getDownPaymentPercent().sendKeys(downPmntPercent);
-        Assert.assertNotEquals(preapprovalDetailsPage.getDownPaymentPercent().getAttribute("value"), downPmntPercent);
+        preapprovalDetailsPage.getDownPaymentPercent().sendKeys(Keys.DELETE, downPmntPercent, Keys.TAB);
+        Assert.assertTrue(preapprovalDetailsPage.getDownPmntPercentageError().isDisplayed());
 
     }
 
@@ -270,7 +273,7 @@ public class PreapprovalDetailsTests extends TestBase{
         PreapprovalDetailsPage preapprovalDetailsPage = new PreapprovalDetailsPage();
         preapprovalDetailsPage.getPApage();
         preapprovalDetailsPage.getAdditionalFunds().sendKeys("1000.222222", Keys.TAB);
-        Assert.assertNotEquals(preapprovalDetailsPage.getAdditionalFunds().getAttribute("value"), "1000.222222");
+        Assert.assertTrue(preapprovalDetailsPage.getAdditionalFundsError().isDisplayed());
 
 
     }
