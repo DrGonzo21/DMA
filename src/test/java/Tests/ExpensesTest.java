@@ -58,7 +58,7 @@ public class ExpensesTest extends TestBase {
                 Assert.assertEquals(Driver.getDriver().getCurrentUrl(), dashboardurl);
         }
 
-        @Test(dataProvider = "customers")
+        @Test(groups = {"smoke"},dataProvider = "customers")
         public void validTestOwning(String email, String password) throws InterruptedException {
 
                 LoginPage login = new LoginPage();
@@ -90,7 +90,7 @@ public class ExpensesTest extends TestBase {
                 Assert.assertEquals(Driver.getDriver().getCurrentUrl(), dashboardUrl);
         }
 
-        @Test(groups = {"smoke"}, dataProvider = "customers")
+        @Test
         public void MonthlyRentalNonNumeric(String email, String password) throws InterruptedException {
 
                 LoginPage login = new LoginPage();
@@ -122,7 +122,7 @@ public class ExpensesTest extends TestBase {
                 System.out.println("Expected Error Message: " + expectedErrorMessage);
                 Assert.assertTrue(actualErrorMessage.trim().contains(expectedErrorMessage.trim()));
         }
-        @Test(dataProvider = "customers")
+        @Test
         public void MonthlyRentalnovalue(String email, String password) throws InterruptedException {
 
                 LoginPage login = new LoginPage();
@@ -155,7 +155,7 @@ public class ExpensesTest extends TestBase {
                 System.out.println("Expected Error Message: " + expectedErrorMessage);
                 Assert.assertTrue(actualErrorMessage.trim().contains(expectedErrorMessage.trim()));
         }
-        @Test(dataProvider = "customers")
+        @Test
         public void MortgageRentalnovalue(String email, String password) throws InterruptedException {
 
                 LoginPage login = new LoginPage();
