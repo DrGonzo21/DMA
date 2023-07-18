@@ -19,7 +19,7 @@ public class SignupButtonHomepage extends TestBase{
 
 
     @Test
-    public void verifySignupButton() {
+    public void verifySignupButton() throws InterruptedException {
 
         SignupButton signup= new SignupButton();
         //Verify “Don't have an account? Sign up” button
@@ -28,6 +28,7 @@ public class SignupButtonHomepage extends TestBase{
 
         //Click on Signup button
         signup.getSignupText().click();
+        Thread.sleep(5000);
 
         String actual = Driver.getDriver().getCurrentUrl();
         //Verify user is redirected to the signup page
