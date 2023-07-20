@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class PersonalInformationPage extends TestBase {
+public class PersonalInformationPage {
 
     public PersonalInformationPage(){
         PageFactory.initElements(Driver.getDriver(), this); // this line initializes all @FindBy annotated variables
@@ -94,15 +94,8 @@ public class PersonalInformationPage extends TestBase {
 
 
 
-
-    ////div[@class='form-group']//label[@id='b_firstName-error']
-
-
-
     //==============================
 
-//    @FindBy
-//    WebElement
 
 
     public WebElement getApplyingWithCoBorrower() {
