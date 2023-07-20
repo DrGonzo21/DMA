@@ -2,18 +2,15 @@ package Tests;
 
 import Pages.PersonalInformationPage;
 import Utils.Driver;
-import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class PersonalInformationTest  extends PersonalInformationPage {
+public class PITest extends PersonalInformationPage {
 
     @Test
     public void LoginTest() {

@@ -1,49 +1,33 @@
 package Tests;
 
-import Pages.LoginPage;
 import Pages.PersonalInformationPage;
 import Pages.SignUpPage;
 import Utils.Driver;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.security.Key;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PIRequiredFields extends PersonalInformationTest {
-
-
-//    @Test
-//    public void LoginTest() {
-//        getEmail().sendKeys("john@gmail.com");
-//        WebElement pass= Driver.getDriver().findElement(By.id("exampleInputPassword1"));
-//        pass.sendKeys("abcdef123");
-//        WebElement signinButton= Driver.getDriver().findElement(By.xpath("//button[@class='btn btn-primary glow w-100 position-relative']"));
-//        signinButton.click();
-//    }
-
-    //Verify Fields with Requirements
+public class PIRequiredFields extends TestBase {
 
     @Test
     public void fieldsTest() {
 
-
         //The first name, last name, email, date of birth, SSN, marital status, and cell phone fields should be required:
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
-        WebElement first = getFirstNameField();
+        PITest PITest = new PITest();
+        PITest.LoginTest();
+
+        PersonalInformationPage personalInformationPage = new PersonalInformationPage();
+
+        WebElement first = personalInformationPage.getFirstNameField();
         first.sendKeys("");
         first.clear();
         first.submit();
@@ -60,56 +44,56 @@ public class PIRequiredFields extends PersonalInformationTest {
     @Test
     public void negativeBorrowerTesting() {
 
-//        verifyCheckBox();
-//        PIRequiredFields piRequiredFields= new PIRequiredFields();
-//        piRequiredFields.LoginTest();
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
+        PITest PITest = new PITest();
+        PITest.LoginTest();
+
+        PersonalInformationPage personalInformationPage = new PersonalInformationPage();
+
+
 
         String invalidFirstName = "John_1.23";
         String invalidMiddleName = "James!@#";
         String invalidLastName = "Doe&123";
         String invalidSuffix = "Jr.12,3";
-        piRequiredFields.getFirstNameField().sendKeys(invalidFirstName, Keys.TAB);
-        piRequiredFields.getMiddleNameField().sendKeys(invalidMiddleName, Keys.TAB);
-        piRequiredFields.getLastNameField().sendKeys(invalidLastName, Keys.TAB);
+        personalInformationPage.getFirstNameField().sendKeys(invalidFirstName, Keys.TAB);
+        personalInformationPage.getMiddleNameField().sendKeys(invalidMiddleName, Keys.TAB);
+        personalInformationPage.getLastNameField().sendKeys(invalidLastName, Keys.TAB);
 
         WebElement BorrowerSuffix= Driver.getDriver().findElement(By.xpath("//span[@id='select2-b_suffix-container']"));
         BorrowerSuffix.click();
-        piRequiredFields.getSuffixField().sendKeys(invalidSuffix);
+        personalInformationPage.getSuffixField().sendKeys(invalidSuffix);
 
-        Assert.assertEquals(piRequiredFields.getFirstNameField().getAttribute("value"), invalidFirstName);
-        Assert.assertEquals(piRequiredFields.getMiddleNameField().getAttribute("value"), invalidMiddleName);
-        Assert.assertEquals(piRequiredFields.getLastNameField().getAttribute("value"), invalidLastName);
-        Assert.assertEquals(piRequiredFields.getSuffixField().getAttribute("value"), invalidSuffix);
+        Assert.assertEquals(personalInformationPage.getFirstNameField().getAttribute("value"), invalidFirstName);
+        Assert.assertEquals(personalInformationPage.getMiddleNameField().getAttribute("value"), invalidMiddleName);
+        Assert.assertEquals(personalInformationPage.getLastNameField().getAttribute("value"), invalidLastName);
+        Assert.assertEquals(personalInformationPage.getSuffixField().getAttribute("value"), invalidSuffix);
 
-        piRequiredFields.getFirstNameCoBorrower().sendKeys(invalidFirstName, Keys.TAB);
-        piRequiredFields.getMiddleNameCoBorrower().sendKeys(invalidMiddleName, Keys.TAB);
-        piRequiredFields.getLastNameCoBorrower().sendKeys(invalidLastName, Keys.TAB);
+        personalInformationPage.getFirstNameCoBorrower().sendKeys(invalidFirstName, Keys.TAB);
+        personalInformationPage.getMiddleNameCoBorrower().sendKeys(invalidMiddleName, Keys.TAB);
+        personalInformationPage.getLastNameCoBorrower().sendKeys(invalidLastName, Keys.TAB);
 
         WebElement coBorrowerSuffix= Driver.getDriver().findElement(By.xpath("//span[@id='select2-c_suffix-container']"));
         coBorrowerSuffix.click();
-        piRequiredFields.getSuffixCoBorrower().sendKeys(invalidSuffix);
+        personalInformationPage.getSuffixCoBorrower().sendKeys(invalidSuffix);
 
 
-        Assert.assertEquals(piRequiredFields.getFirstNameCoBorrower().getAttribute("value"), invalidFirstName);
-        Assert.assertEquals(piRequiredFields.getMiddleNameCoBorrower().getAttribute("value"), invalidMiddleName);
-        Assert.assertEquals(piRequiredFields.getLastNameCoBorrower().getAttribute("value"), invalidLastName);
-        Assert.assertEquals(piRequiredFields.getSuffixCoBorrower().getAttribute("value"), invalidSuffix);
+        Assert.assertEquals(personalInformationPage.getFirstNameCoBorrower().getAttribute("value"), invalidFirstName);
+        Assert.assertEquals(personalInformationPage.getMiddleNameCoBorrower().getAttribute("value"), invalidMiddleName);
+        Assert.assertEquals(personalInformationPage.getLastNameCoBorrower().getAttribute("value"), invalidLastName);
+        Assert.assertEquals(personalInformationPage.getSuffixCoBorrower().getAttribute("value"), invalidSuffix);
 
 
     }
 
     //The first name, middle name, last name, and suffix fields should only allow alphabetical characters and spaces.
     @Test
-    public void positiveBorrowerTesting() throws InterruptedException {
+    public void positiveBorrowerTesting()  {
 
-//        verifyCheckBox();
-        Thread.sleep(1000);
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
+        PITest PITest = new PITest();
+        PITest.LoginTest();
 
         PersonalInformationPage personalInformationPage = new PersonalInformationPage();
+
         String validFirstName = "John";
         String validMiddleName = "James";
         String validLastName = "Doe";
@@ -146,13 +130,11 @@ public class PIRequiredFields extends PersonalInformationTest {
     //The email field should only allow a valid email address format (e.g., john.doe@email.com).
     @Test
     public void emailTesting() {
-        //The email field should only allow a valid email address format (e.g., john.doe@email.com):
-//        Driver.getDriver().get("http://qa-duobank.us-east-2.elasticbeanstalk.com/index.php");
-//        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-//        Driver.getDriver().manage().window().maximize();
 
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
+        PITest PITest = new PITest();
+        PITest.LoginTest();
+
+        PersonalInformationPage personalInformationPage = new PersonalInformationPage();
 
 
         try {
@@ -160,7 +142,7 @@ public class PIRequiredFields extends PersonalInformationTest {
             SignUpPage signUpPage = new SignUpPage();
             WebElement pass = Driver.getDriver().findElement(By.xpath("//input[@name='password']"));
 
-            getEmail().sendKeys("12345khkjnh", Keys.TAB);
+            personalInformationPage.getEmail().sendKeys("12345khkjnh", Keys.TAB);
             pass.sendKeys("12345");
             loginButton.click();
             Assert.assertFalse(Driver.getDriver().getPageSource().contains("Registration Successful"));
@@ -173,11 +155,15 @@ public class PIRequiredFields extends PersonalInformationTest {
     //The date of birth field should only allow a valid date format (e.g., mm/dd/yyyy) and the date should be before the current date.
     @Test
     public void dobBorrowerTest() {
-//        PIRequiredFields.LoginTest();
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
+
+        PITest PITest = new PITest();
+        PITest.LoginTest();
+
+        PersonalInformationPage personalInformationPage = new PersonalInformationPage();
+
+
         String validDate = "03/25/1990";
-        getDobBorrower().sendKeys(validDate, Keys.TAB);
+        personalInformationPage.getDobBorrower().sendKeys(validDate, Keys.TAB);
 
         boolean isDateFormatValid = validDate.matches("\\d{2}/\\d{2}/\\d{4}");
         Assert.assertTrue(isDateFormatValid, "Date format is invalid.");
@@ -191,12 +177,15 @@ public class PIRequiredFields extends PersonalInformationTest {
 
     @Test
     public void dobCoBorrowerTest() {
-//        verifyCheckBox();
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
+
+        PITest PITest = new PITest();
+        PITest.LoginTest();
+
+        PersonalInformationPage personalInformationPage = new PersonalInformationPage();
+
 
         String validDate = "03/25/1990";
-        getDobCoBorrwer().sendKeys(validDate, Keys.TAB);
+        personalInformationPage.getDobCoBorrwer().sendKeys(validDate, Keys.TAB);
 
         boolean isDateFormatValid = validDate.matches("\\d{2}/\\d{2}/\\d{4}");
         Assert.assertTrue(isDateFormatValid, "Date format is invalid.");
@@ -212,13 +201,16 @@ public class PIRequiredFields extends PersonalInformationTest {
     //The SSN field should only allow a valid Social Security Number format (e.g., 123-45-6789) and should not allow duplicates with other applicants.
     @Test
     public void ssnBorrowerTest() {
-//        verifyCheckBox();
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
-        String validSSN = "123-45-6789";
-        getSsnFieldBorrower().sendKeys(validSSN);
 
-        boolean isSSNFormatValid = validSSN.matches("[0-9]{3}-[0-9]{2}-[0-9]{4}");
+        PITest PITest = new PITest();
+        PITest.LoginTest();
+
+        PersonalInformationPage personalInformationPage = new PersonalInformationPage();
+
+        String validSSN = "123-45-6789";
+        personalInformationPage.getSsnFieldBorrower().sendKeys(validSSN);
+
+        boolean isSSNFormatValid = validSSN.matches("\\d{3}-\\d{3}-\\d{4}");
         Assert.assertTrue(isSSNFormatValid, "SSN format is invalid.");
 
 
@@ -230,13 +222,16 @@ public class PIRequiredFields extends PersonalInformationTest {
     @Test
     public void ssnCoBorrowerTest() throws InterruptedException {
 
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
+        PITest PITest = new PITest();
+        PITest.LoginTest();
+
+        PersonalInformationPage personalInformationPage = new PersonalInformationPage();
+
         Thread.sleep(1000);
 
 
         String validSSN = "123-45-6789";
-        getSsnFieldCoBorrower().sendKeys(validSSN);
+        personalInformationPage.getSsnFieldCoBorrower().sendKeys(validSSN);
 
 
         boolean isSSNFormatValid = validSSN.matches("[0-9]{3}-[0-9]{2}-[0-9]{4}");
@@ -251,9 +246,10 @@ public class PIRequiredFields extends PersonalInformationTest {
     //The marital status field should only allow the values "single," "married," or "divorced."
     @Test
     public void maritalStatusBorrowerTest() {
-//        verifyCheckBox();
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
+
+        PITest PITest = new PITest();
+        PITest.LoginTest();
+
 
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         WebElement dropdownElement = Driver.getDriver().findElement(By.id("b_marital"));
@@ -272,9 +268,10 @@ public class PIRequiredFields extends PersonalInformationTest {
 
     @Test
     public void maritalStatusCoBorrowerTest() {
-//        verifyCheckBox();
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
+
+        PITest PITest = new PITest();
+        PITest.LoginTest();
+
 
         JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
         WebElement dropdownElement = Driver.getDriver().findElement(By.id("c_marital"));
@@ -295,47 +292,55 @@ public class PIRequiredFields extends PersonalInformationTest {
     //The cell phone and home phone fields should only allow valid phone number formats (e.g., 123-456-6789):
     @Test
     private void phonesFieldBorrowerTest() {
-//        verifyCheckBox();
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
+
+        PITest PITest = new PITest();
+        PITest.LoginTest();
+
+        PersonalInformationPage personalInformationPage = new PersonalInformationPage();
+
 
         String invalidNumbers= "123456789";
-        String acceptanceFormat= "[0-9]{3}-[0-9]{2}-[0-9]{4}";
+        String acceptanceFormat= "[0-9]{3}-[0-9]{3}-[0-9]{4}";
 
-        getCellphoneBorrower().sendKeys(invalidNumbers);
-        getHomephoneBorrower().sendKeys(invalidNumbers);
+        personalInformationPage.getCellphoneBorrower().sendKeys(invalidNumbers);
+        personalInformationPage.getHomephoneBorrower().sendKeys(invalidNumbers);
 
-        Assert.assertTrue(getCellphoneBorrower().getAttribute("value").matches(acceptanceFormat));
-        Assert.assertTrue(getHomephoneBorrower().getAttribute("value").matches(acceptanceFormat));
+        Assert.assertTrue(personalInformationPage.getCellphoneBorrower().getAttribute("value").matches(acceptanceFormat));
+        Assert.assertTrue(personalInformationPage.getHomephoneBorrower().getAttribute("value").matches(acceptanceFormat));
 
     }
 
     @Test
     public void phonesFieldCoBorrowerTest() {
 
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
+        PITest PITest = new PITest();
+        PITest.LoginTest();
+
+        PersonalInformationPage personalInformationPage = new PersonalInformationPage();
+
 
         String invalidNumbers= "123456789";
-        String acceptanceFormat= "[0-9]{3}-[0-9]{2}-[0-9]{4}";
+        String acceptanceFormat= "[0-9]{3}-[0-9]{3}-[0-9]{4}";
 
-        getCellphoneCoBorrower().sendKeys(invalidNumbers);
-        getHomephoneCoBorrower().sendKeys(invalidNumbers);
+        personalInformationPage.getCellphoneCoBorrower().sendKeys(invalidNumbers);
+        personalInformationPage.getHomephoneCoBorrower().sendKeys(invalidNumbers);
 
-        Assert.assertTrue(getCellphoneCoBorrower().getAttribute("value").matches(acceptanceFormat));
-        Assert.assertTrue(getHomephoneCoBorrower().getAttribute("value").matches(acceptanceFormat));
+        Assert.assertTrue(personalInformationPage.getCellphoneCoBorrower().getAttribute("value").matches(acceptanceFormat));
+        Assert.assertTrue(personalInformationPage.getHomephoneCoBorrower().getAttribute("value").matches(acceptanceFormat));
     }
 
 
-    //
+    //The Privacy Policy section should have a checkbox with the statement "I/We have read and accepted the terms of the Privacy Policy.":
     @Test
-    public void privacyPolicyTest() {
-//        verifyCheckBox();
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
+    public void privacyPolicyTest() throws InterruptedException {
+
+        PITest PITest = new PITest();
+        PITest.LoginTest();
 
         WebElement ppStatement= Driver.getDriver().findElement(By.xpath("//div[@class='checkbox checkbox-primary checkbox-glow']//input[@id='privacypolicy']"));
         WebElement ppDisplayed= Driver.getDriver().findElement(By.xpath("//input[@id='privacypolicy']"));
+
+
         Assert.assertFalse(ppDisplayed.isDisplayed(), "Privacy Policy checkbox is not displayed");
         String expectedLabel = "I/We have read and accepted the terms of the Privacy Policy.";
         String actualLabel = ppStatement.getText();
@@ -345,9 +350,9 @@ public class PIRequiredFields extends PersonalInformationTest {
     //The Previous and Next buttons should be clearly labeled and functional, allowing the user to navigate between pages and make changes as needed:
     @Test
     public void buttonsTest() {
-//        verifyCheckBox();
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
+
+        PITest PITest = new PITest();
+        PITest.LoginTest();
 
         WebElement nextButton= Driver.getDriver().findElement(By.xpath("//li[@aria-hidden='false']"));
         nextButton.click();
@@ -360,11 +365,13 @@ public class PIRequiredFields extends PersonalInformationTest {
     //All input fields should have clear labels and validation messages to guide the user in filling out the necessary information:
     @Test
     public void clearLabels() {
-//        verifyCheckBox();
 
-        PIRequiredFields piRequiredFields= new PIRequiredFields();
-        piRequiredFields.LoginTest();
-        getFirstNameField().submit();
+        PITest PITest = new PITest();
+        PITest.LoginTest();
+
+        PersonalInformationPage personalInformationPage = new PersonalInformationPage();
+
+        personalInformationPage.getFirstNameField().submit();
 
         WebElement necessaryBorrowerFields= Driver.getDriver().findElement(By.xpath("//div[@class='borrower']//label[@class='danger']"));
 //        String label= labels.getText();
@@ -381,13 +388,16 @@ public class PIRequiredFields extends PersonalInformationTest {
     @Test
     public void validNextButton() throws InterruptedException {
 
-        PIRequiredFields piRequiredFields = new PIRequiredFields();
-        piRequiredFields.LoginTest();
+        PITest PITest = new PITest();
+        PITest.LoginTest();
+
+        PersonalInformationPage personalInformationPage = new PersonalInformationPage();
+
         Thread.sleep(1000);
 
         String validDate = "03/25/1990";
-        getDobBorrower().sendKeys(validDate, Keys.TAB);
-        getDobCoBorrwer().sendKeys(validDate, Keys.TAB);
+        personalInformationPage.getDobBorrower().sendKeys(validDate, Keys.TAB);
+        personalInformationPage.getDobCoBorrwer().sendKeys(validDate, Keys.TAB);
 
         // Wait for the marital status dropdown to be visible
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
@@ -404,17 +414,27 @@ public class PIRequiredFields extends PersonalInformationTest {
         Select coBorrowerSelect = new Select(maritalDropdownCoBorrower);
         coBorrowerSelect.selectByIndex(2);
 
-        String invalidNumbers = "123456789";
-        getCellphoneBorrower().sendKeys(invalidNumbers);
-        getHomephoneBorrower().sendKeys(invalidNumbers);
+        String invalidNumbers = "123456789123";
+        personalInformationPage.getCellphoneBorrower().sendKeys(invalidNumbers);
+        personalInformationPage.getHomephoneBorrower().sendKeys(invalidNumbers);
 
-        getCellphoneCoBorrower().sendKeys(invalidNumbers);
-        getHomephoneCoBorrower().sendKeys(invalidNumbers);
+        personalInformationPage.getCellphoneCoBorrower().sendKeys(invalidNumbers);
+        personalInformationPage.getHomephoneCoBorrower().sendKeys(invalidNumbers);
 
         // Wait for the next button to be clickable
         WebElement nextButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//li[@aria-hidden='false']")));
+        WebElement checkbox= Driver.getDriver().findElement(By.xpath("//div[@class='row col-12']//div[@class='checkbox checkbox-primary checkbox-glow']"));
 
+        Thread.sleep(2000);
+        if (!checkbox.isSelected()) {
+            checkbox.click();
+        }
+
+        String currentUrlBeforeNextClick = Driver.getDriver().getCurrentUrl();
         nextButton.click();
+
+        String currentUrlAfterNextClick = Driver.getDriver().getCurrentUrl();
+        Assert.assertEquals(currentUrlAfterNextClick, currentUrlBeforeNextClick, "User was able to proceed without checking the privacy policy checkbox.");
 
     }
 
