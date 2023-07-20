@@ -10,15 +10,17 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PITest extends PersonalInformationPage {
+public class PITest extends TestBase {
 
     @Test
     public void LoginTest() {
-//        Driver.getDriver().get("http://qa-duobank.us-east-2.elasticbeanstalk.com/index.php");
+
+        PersonalInformationPage personalInformationPage= new PersonalInformationPage();
+
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         Driver.getDriver().manage().window().maximize();
 
-        getEmail().sendKeys("john@gmail.com");
+        personalInformationPage.getEmail().sendKeys("john@gmail.com");
         WebElement pass= Driver.getDriver().findElement(By.id("exampleInputPassword1"));
         pass.sendKeys("abcdef123");
         WebElement signinButton= Driver.getDriver().findElement(By.xpath("//button[@class='btn btn-primary glow w-100 position-relative']"));
@@ -39,25 +41,13 @@ public class PITest extends PersonalInformationPage {
     }
     @Test
     public void verifyCheckBox() {
-//        Driver.getDriver().get("http://qa-duobank.us-east-2.elasticbeanstalk.com/index.php");
-//        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-//        Driver.getDriver().manage().window().maximize();
 
-        //Login
-//        Driver.getDriver().findElement(By.xpath("//input[@id='exampleInputEmail1']")).sendKeys("john@gmail.com", Keys.ENTER);
-//        Driver.getDriver().findElement(By.xpath("//input[@id='exampleInputPassword1']")).sendKeys("abcdef123", Keys.ENTER);
-
-
-
-        //Personal Information page
-
-
-//        System.out.println("Field contains: " +"\n"+getGetYesOrNoCheckBox().getText());
+        PersonalInformationPage personalInformationPage= new PersonalInformationPage();
 
         LoginTest();
         //The "Are you applying with a co-borrower?" field should have checkboxes with options "Yes" and "No".
-        String labelText= getApplyingWithCoBorrower().getText();
-        System.out.println(labelText + "\n"+ getGetYesOrNoCheckBox().getText());
+        String labelText= personalInformationPage.getApplyingWithCoBorrower().getText();
+        System.out.println(labelText + "\n"+ personalInformationPage.getGetYesOrNoCheckBox().getText());
 
         //If the user selects "Yes" for the co-borrower question, the page should display an additional section for co-borrower's information.
         WebElement additional= Driver.getDriver().findElement(By.xpath("//div[@class='borrower'][@style='display: block;'] "));
@@ -89,16 +79,6 @@ public class PITest extends PersonalInformationPage {
             Assert.assertTrue(element.isDisplayed());
         }
 
-//
-
-
-
-
-
-
-
-
     }
-
 
 }
