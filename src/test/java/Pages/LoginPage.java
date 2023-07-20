@@ -17,7 +17,7 @@ public class LoginPage {
     private WebElement password;
     @FindBy(xpath = "//button[@type='submit']")
     private WebElement signInButton;
-    @FindBy(xpath = "//span[@class='menu-item'][1]")
+    @FindBy(xpath = "//span[@data-i18n='eCommerce']")
     private WebElement mortgageApp;
     @FindBy(xpath = "//a[@class='dropdown-toggle nav-link dropdown-user-link']")
     private WebElement username;
