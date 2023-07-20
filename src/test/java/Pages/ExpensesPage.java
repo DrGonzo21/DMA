@@ -31,6 +31,13 @@ public class ExpensesPage {
       @FindBy (xpath = "//label[@id='firtmortagagetotalpayment-error']")
       private WebElement mortgagepaymenterror;
 
+    @FindBy(xpath = "//a[@href='#next']")
+    private WebElement nextButton;
+
+    public WebElement getNextButton() {
+        return nextButton;
+    }
+
     public WebElement getMortgagepaymenterror() {
         return mortgagepaymenterror;
     }
