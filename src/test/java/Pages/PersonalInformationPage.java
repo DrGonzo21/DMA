@@ -13,7 +13,7 @@ public class PersonalInformationPage {
         PageFactory.initElements(Driver.getDriver(), this); // this line initializes all @FindBy annotated variables
     }
 
-    @FindBy (xpath = "//label[@for='proposalTitle1']")
+    @FindBy (xpath = "//label[@for='coborrower2']")
     private WebElement applyingWithCoBorrower;
 
 
@@ -29,7 +29,7 @@ public class PersonalInformationPage {
 //    @FindBy (xpath = "//div[@class='col-sm-6']//ul[@class='list-unstyled mb-0']")
 //    private WebElement yesOrNoCheckBox;
 
-    @FindBy (xpath = "//input[@id='b_firstName']")
+    @FindBy (name = "b_firstName")
     private WebElement firstNameField;
 
     @FindBy (xpath = "//input[@id='b_middleName']")
@@ -48,6 +48,12 @@ public class PersonalInformationPage {
     private WebElement maritalField;
     ////div[@data-select2-id='16']//span[@class='select2-selection__arrow']
 
+    @FindBy (id ="b_marital" )
+    private WebElement maritalField2;
+
+    public WebElement getMaritalField2() {
+        return maritalField2;
+    }
 
     @FindBy (xpath = "//input[@class='select2-search__field']")
     private WebElement suffixField;
@@ -92,9 +98,13 @@ public class PersonalInformationPage {
     @FindBy (xpath = "//input[@id='c_email']")
     private WebElement emailCoBorrower;
 
+    @FindBy(xpath = "//a[@href='#next']")
+    private WebElement nextButton;
 
-
-    //==============================
+    public WebElement getNextButton() {
+        return nextButton;
+    }
+//==============================
 
 
 
