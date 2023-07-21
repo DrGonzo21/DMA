@@ -1,6 +1,7 @@
 package JerrodPages;
 
 import Utils.Driver;
+import com.github.javafaker.Faker;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -47,5 +48,14 @@ public class JpreApproval {
 
     public WebElement getDpPercentage() {
         return dpPercentage;
+    }
+
+    public void validPreApprovalInfo(){
+        Faker faker = new Faker();
+        getRealtorinfo().sendKeys(faker.name().firstName());
+        getEstimatedprice().sendKeys(String.valueOf(faker.random().nextInt(100, 5000000)));
+        getDownpayment().sendKeys(String.valueOf(faker.random().nextInt(100, 10000)));
+//        approve.getDpPercentage().sendKeys(String.valueOf(faker.random().nextInt(1, 100)));
+        getNextbutton().click();
     }
 }

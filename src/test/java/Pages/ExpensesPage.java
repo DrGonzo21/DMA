@@ -1,6 +1,7 @@
 package Pages;
 
 import Utils.Driver;
+import com.github.javafaker.Faker;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -75,6 +76,12 @@ public class ExpensesPage {
     }
     public WebElement getMortgagepayment() {
         return Mortgagepayment;
+    }
+
+    public void validExpensesInfo(){
+        Faker faker = new Faker();
+        getRentalpayment().sendKeys(String.valueOf(faker.random().nextInt(1000, 3000)));
+        getNextButton().click();
     }
 }
 

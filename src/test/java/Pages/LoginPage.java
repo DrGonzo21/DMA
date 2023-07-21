@@ -72,5 +72,11 @@ public class LoginPage {
         emailAddress.sendKeys(email, Keys.TAB, password, Keys.ENTER);
     }
 
-
+    public void validLoginInfo() throws InterruptedException {
+        getEmailAddress().sendKeys("rschwand0@soundcloud.com");
+        getPassword().sendKeys("aD2Z_oq+k'2b");
+        Thread.sleep(1500);
+        getSignInButton().click();
+        getMortgageApp().click();
+    }
 }
