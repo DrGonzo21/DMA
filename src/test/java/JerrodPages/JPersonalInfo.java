@@ -1,6 +1,8 @@
 package JerrodPages;
 
 import Utils.Driver;
+import com.github.javafaker.Faker;
+import lombok.Data;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -10,8 +12,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-
+@Data
 public class JPersonalInfo {
+
     public JPersonalInfo(){
             PageFactory.initElements(Driver.getDriver(), this); // this line initializes all @FindBy annotated variables
         }
@@ -35,34 +38,8 @@ public class JPersonalInfo {
         private WebElement borrowerboxno;
     @FindBy (xpath = "//input[@id='b_dob']")
         private WebElement calandar;
-
-    public WebElement getCalandar() {
-        return calandar;
-    }
-
-    public WebElement getNextbutton() {
-        return nextbutton;
-    }
-
-    public WebElement getFirstname() {
-        return firstname;
-    }
-
-    public WebElement getMiddlename() {
-        return middlename;
-    }
-
-    public WebElement getLastname() {
-        return lastname;
-    }
-
-    public WebElement getSsn() {
-        return ssn;
-    }
-
-    public WebElement getEmail() {
-        return email;
-    }
+    @FindBy (xpath = "//input[@id='b_home']")
+    private WebElement homenumber;
 
     public WebElement getMaritalstatus() {
 
@@ -79,13 +56,17 @@ public class JPersonalInfo {
 
         return maritalStatusDropdown;
     }
-
-    public WebElement getCellnumber() {
-        return cellnumber;
-    }
-
-    public WebElement getBorrowerboxno() {
-        return borrowerboxno;
+    public void validInfoFillout(){
+        Faker faker = new Faker();
+        getFirstname().sendKeys(faker.name().firstName());
+        getLastname().sendKeys(faker.name().lastName());
+        getEmail().sendKeys(faker.internet().emailAddress());
+        getCalandar().sendKeys("05051980");
+        getSsn().sendKeys(faker.idNumber().ssnValid());
+        getMaritalstatus();
+        getCellnumber().sendKeys(faker.phoneNumber().cellPhone());
+        getHomenumber().sendKeys(faker.phoneNumber().phoneNumber());
+        getNextbutton().click();
     }
 }
 
