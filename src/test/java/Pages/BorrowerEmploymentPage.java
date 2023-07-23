@@ -50,24 +50,24 @@ public class BorrowerEmploymentPage {
 
 
         public WebElement getState(String value){
-            String xpath = "//select[@id='state1']//option[.='" + value + "']";
+            String xpath = "//select[@id='state1']//option[@value='"+ value +"']";
             return Driver.getDriver().findElement(By.xpath(xpath));
         }
         public WebElement getState2(String value){
-            String xpath = "//select[@id='state2']//option[.='" + value + "']";
+            String xpath = "//select[@id='state2']//option[@value='"+ value +"']";
             return Driver.getDriver().findElement(By.xpath(xpath));
         }
 
     public WebElement getIncomeSource(String value) {
-        String xpath = "//select[@id='incomesource1']//option[.='" + value + "']";
+        String xpath = "//select[@id='incomesource1']//option[@value='"+ value +"']";
         return Driver.getDriver().findElement(By.xpath(xpath));
     }
     public WebElement getIncomeSource2(String value) {
-        String xpath = "//select[@id='incomesource2']//option[.='" + value + "']";
+        String xpath = "//select[@id='incomesource2']//option[@value='"+ value +"']";
         return Driver.getDriver().findElement(By.xpath(xpath));
     }
     public WebElement getIncomeSource3(String value) {
-        String xpath = "//select[@id='incomesource3']//option[.='" + value + "']";
+        String xpath = "//select[@id='incomesource3']//option[@value='" + value + "']";
         return Driver.getDriver().findElement(By.xpath(xpath));
     }
     public void borrowPageInfo(){
@@ -82,11 +82,11 @@ public class BorrowerEmploymentPage {
         getMonthlyBonuses().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
         getMonthlyComissions().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
         getMonthlyDividents().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
-        getIncomeSource("Alimnoy/Child Support").click();
+        getIncomeSource("Alimony/Child Support").click();
         getAmount().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
-        getIncomeSource2("Other Types of Income").click();
+        getIncomeSource2("Unemployment Benefits").click();
         getAmount2().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
-        getIncomeSource3("Social Security/Disability Income").click();
+        getIncomeSource3("Royalty Payments").click();
         getAmount3().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
         getNextButton().click();
     }
@@ -108,7 +108,7 @@ public class BorrowerEmploymentPage {
         getMonthlyBonuses().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
         getMonthlyComissions().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
         getMonthlyDividents().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
-        getIncomeSource("Alimnoy/Child Support").click();
+        getIncomeSource("Alimony/Child Support").click();
         getAmount().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
         getIncomeSource2("Other Types of Income").click();
         getAmount2().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
