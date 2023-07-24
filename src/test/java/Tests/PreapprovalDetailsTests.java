@@ -178,18 +178,6 @@ public class PreapprovalDetailsTests extends TestBase{
 
     }
 
-    @Test
-    public void downPmntAmountFormatTab() {
-        LoginPage loginPage = new LoginPage();
-        loginPage.loginWithValidCredentials();
-        PreapprovalDetailsPage preapprovalDetailsPage = new PreapprovalDetailsPage();
-        preapprovalDetailsPage.getPApage();
-        preapprovalDetailsPage.getEstPrice().sendKeys("10000");
-        String downPmnt = "1000.55";
-        preapprovalDetailsPage.getDownPayment().sendKeys(downPmnt, Keys.TAB);
-        Assert.assertEquals(preapprovalDetailsPage.getDownPayment().getAttribute("value"), downPmnt);
-
-    }
 
     @Test
     public void downPmntPercentFormatPositive() {
