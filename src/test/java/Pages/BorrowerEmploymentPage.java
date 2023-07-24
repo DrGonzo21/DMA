@@ -45,6 +45,11 @@ public class BorrowerEmploymentPage {
         @FindBy(xpath = "//a[@href='#next']") private WebElement NextButton;
         @FindBy(xpath = "//a[@href='#previous']") private WebElement PreviousButton;
         @FindBy(xpath = "//a[@href='#finish']") private WebElement SaveButton;
+        @FindBy(xpath = "//div[@class='Employer']//a[@id='clear2']") private WebElement clear2button;
+        @FindBy(xpath = "//div[@class='Employer']//a[@id='clear1']") private WebElement clearbutton;
+        @FindBy(xpath = "//div[@class='Employer']//a[@id='remove2']") private WebElement removebutton;
+        @FindBy(xpath = "//div[@class='swal2-actions']//button[@class='swal2-confirm btn btn-warning']") private WebElement confirmYesPopupActionbuton;
+        @FindBy(xpath = "//div[@class='swal2-actions']//button[@class='swal2-cancel btn btn-danger ml-1']") private WebElement cancelPopupActionbutton;
 
 
 
@@ -108,11 +113,42 @@ public class BorrowerEmploymentPage {
         getMonthlyBonuses().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
         getMonthlyComissions().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
         getMonthlyDividents().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
-        getIncomeSource("Alimony/Child Support").click();
+        getIncomeSource("Social Security/Disability Income").click();
         getAmount().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
-        getIncomeSource2("Other Types of Income").click();
+        getIncomeSource2("Interest and Dividends").click();
         getAmount2().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
-        getIncomeSource3("Social Security/Disability Income").click();
+        getIncomeSource3("Royalty Payments").click();
+        getAmount3().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
+        getNextButton().click();
+    }
+
+    @Test
+    public void borrowPageConfirmClearRemoveButtons(){
+        getEmployerName().sendKeys(faker.name().firstName());
+        getPosition().sendKeys(faker.job().position());
+        getCity().sendKeys(faker.address().city());
+        getState("AK").click();
+        getStartDate().sendKeys(faker.date().toString());
+        getAddAnotherEmployer().click();
+        getEmployerName2().sendKeys(faker.name().firstName());
+        getPosition2().sendKeys(faker.job().position());
+        getCity2().sendKeys(faker.address().city());
+        getState2("AK").click();
+        getStartDate2().sendKeys(faker.date().toString());
+        getClear2button().click();
+        getConfirmYesPopupActionbuton().click();
+        getRemovebutton().click();
+        getConfirmYesPopupActionbuton().click();
+        getGrossMonthlyIncome().sendKeys(String.valueOf(faker.random().nextInt(901) + 100));
+        getMonthlyOvertime().sendKeys(String.valueOf(faker.random().nextInt(901) + 100));
+        getMonthlyBonuses().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
+        getMonthlyComissions().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
+        getMonthlyDividents().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
+        getIncomeSource("Social Security/Disability Income").click();
+        getAmount().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
+        getIncomeSource2("Interest and Dividends").click();
+        getAmount2().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
+        getIncomeSource3("Royalty Payments").click();
         getAmount3().sendKeys(String.valueOf(faker.random().nextInt(901)+100));
         getNextButton().click();
     }

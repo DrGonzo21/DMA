@@ -43,6 +43,20 @@ public class UserStory7 extends TestBase {
         String expected = "http://qa-duobank.us-east-2.elasticbeanstalk.com/mortgage.php";
         Assert.assertEquals(Driver.getDriver().getCurrentUrl(),expected);
     }
+    @Test
+    public void ClearRemoveButtons() throws InterruptedException {
+        new LoginPage().validLoginInfo();
+        Thread.sleep(500);
+        new JpreApproval().validPreApprovalInfo();
+        Thread.sleep(500);
+        new JPersonalInfo().validInfoFillout();
+        Thread.sleep(500);
+        new ExpensesPage().validExpensesInfo();
+        Thread.sleep(500);
+        new BorrowerEmploymentPage().borrowPageConfirmClearRemoveButtons();
+        String expected = "http://qa-duobank.us-east-2.elasticbeanstalk.com/mortgage.php";
+        Assert.assertEquals(Driver.getDriver().getCurrentUrl(),expected);
+    }
 
 
 
