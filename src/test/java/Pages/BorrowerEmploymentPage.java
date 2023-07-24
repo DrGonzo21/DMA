@@ -53,7 +53,7 @@ public class BorrowerEmploymentPage {
 
 
 
-
+        // Values to use for state can be 2 letter abbreviation e.g "CA" can be California
         public WebElement getState(String value){
             String xpath = "//select[@id='state1']//option[@value='"+ value +"']";
             return Driver.getDriver().findElement(By.xpath(xpath));
@@ -63,6 +63,7 @@ public class BorrowerEmploymentPage {
             return Driver.getDriver().findElement(By.xpath(xpath));
         }
 
+        // Vaules for income source to use = "Alimony/Child Support" , "Social Security/Disability Income" , "Unemployment Benefits" , "Interest and Dividends" , "VA Compensation" , "Royalty Payments" , "Other Types of Income"
     public WebElement getIncomeSource(String value) {
         String xpath = "//select[@id='incomesource1']//option[@value='"+ value +"']";
         return Driver.getDriver().findElement(By.xpath(xpath));
