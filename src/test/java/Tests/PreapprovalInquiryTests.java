@@ -2,6 +2,7 @@ package Tests;
 
 import Pages.*;
 import Utils.CSVReader;
+import Utils.Driver;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -18,39 +19,52 @@ public class PreapprovalInquiryTests extends TestBase{
     }
 
     @Test(dataProvider = "applicants")
-    public void fillOutApplication(String firstName,
-                                   String lastName,
-                                   String email,
-                                   String dob,
-                                   String ssn,
-                                   String cellPhone,
-                                   String homePhone){
-        LoginPage loginPage = new LoginPage();
-        loginPage.loginWithValidCredentials();
-        PreapprovalDetailsPage preapprovalDetailsPage = new PreapprovalDetailsPage();
-        preapprovalDetailsPage.getPApage();
-        preapprovalDetailsPage.getRealtorInfo().sendKeys("John Smith, 412-123-1234, john@gmail.com");
-        preapprovalDetailsPage.getEstPrice().sendKeys("10000");
-        preapprovalDetailsPage.getDownPayment().sendKeys("1000");
-        preapprovalDetailsPage.getNextButton().click();
+    public void orderReportOptions(String firstName,
+                            String lastName,
+                            String email,
+                            String dob,
+                            String ssn,
+                            String cellPhone,
+                            String homePhone){
 
-        PersonalInformationPage personalInformationPage = new PersonalInformationPage();
-        personalInformationPage.getNoCheckBox();
-        personalInformationPage.getFirstNameField().sendKeys(firstName);
-        personalInformationPage.getLastNameField().sendKeys(lastName);
-        personalInformationPage.getEmailFieldBorrower().sendKeys(email);
-        personalInformationPage.getDobBorrower().sendKeys(dob);
-        personalInformationPage.getSsnFieldBorrower().sendKeys(ssn);
+        PreaaprovalInquiryPage preaaprovalInquiryPage = new PreaaprovalInquiryPage();
+        preaaprovalInquiryPage.fillOutApplication(firstName,lastName,email, dob, ssn, cellPhone, homePhone);
+        //Assert.assertEquals(preaaprovalInquiryPage.getOrderReport().getText(), "Yes");
+       // System.out.println(preaaprovalInquiryPage.getOrderReport().getAttribute("text"));
+        //System.out.println(preaaprovalInquiryPage.getNoReport().getText());
+    }
 
-        Select status = new Select(personalInformationPage.getMaritalField2());
-        status.selectByIndex(2);
-        personalInformationPage.getCellphoneBorrower().sendKeys(cellPhone);
-        personalInformationPage.getHomephoneBorrower().sendKeys(homePhone);
-        personalInformationPage.getNextButton().click();
+    @Test(dataProvider = "applicants")
+    public void orderReport(String firstName,
+                            String lastName,
+                            String email,
+                            String dob,
+                            String ssn,
+                            String cellPhone,
+                            String homePhone){
 
-        ExpensesPage expensesPage = new ExpensesPage();
-        expensesPage.getRentalpayment().sendKeys("1000");
-        expensesPage.getNextButton().click();
+        PreaaprovalInquiryPage preaaprovalInquiryPage = new PreaaprovalInquiryPage();
+        preaaprovalInquiryPage.fillOutApplication(firstName,lastName,email, dob, ssn, cellPhone, homePhone);
+        preaaprovalInquiryPage.getOrderReport();
+        preaaprovalInquiryPage.getSaveButton().click();
+        Assert.assertNotEquals(Driver.getDriver().getCurrentUrl(), "http://qa-duobank.us-east-2.elasticbeanstalk.com/mortgage.php");
+
+    }
+
+    @Test(dataProvider = "applicants")
+    public void dontOrderReport(String firstName,
+                            String lastName,
+                            String email,
+                            String dob,
+                            String ssn,
+                            String cellPhone,
+                            String homePhone){
+
+        PreaaprovalInquiryPage preaaprovalInquiryPage = new PreaaprovalInquiryPage();
+        preaaprovalInquiryPage.fillOutApplication(firstName,lastName,email, dob, ssn, cellPhone, homePhone);
+        preaaprovalInquiryPage.getNoReport();
+        preaaprovalInquiryPage.getSaveButton().click();
+        Assert.assertEquals(Driver.getDriver().getCurrentUrl(), "http://qa-duobank.us-east-2.elasticbeanstalk.com/mortgage.php");
 
     }
 
