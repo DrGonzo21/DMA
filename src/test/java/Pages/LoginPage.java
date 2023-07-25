@@ -79,4 +79,10 @@ public class LoginPage {
         getSignInButton().click();
         getMortgageApp().click();
     }
+
+    public boolean isButtonDisabledSignInWithEmailOnly(WebElement button ){
+        return button.isEnabled();
+    }
+
+
 }
