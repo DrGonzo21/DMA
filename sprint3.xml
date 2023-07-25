@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="Smoke Test Suite" parallel="methods" time-out="120000">
+<suite name="Smoke Test Suite" parallel="methods" thread-count="3" time-out="120000">
 
     <test name="Sprint 3 Tests">
 
         <classes>
             <class name="Tests.PreapprovalInquiryTests"/>
-            <class name=""></class>
+            <class name="Tests.UserStory7"></class>
         </classes>
 
     </test>
