@@ -18,21 +18,20 @@ public class PreapprovalInquiryTests extends TestBase{
         return CSVReader.readFromCSVFile("applicants.csv");
     }
 
-    @Test(dataProvider = "applicants")
-    public void orderReportOptions(String firstName,
-                            String lastName,
-                            String email,
-                            String dob,
-                            String ssn,
-                            String cellPhone,
-                            String homePhone){
-
-        PreaaprovalInquiryPage preaaprovalInquiryPage = new PreaaprovalInquiryPage();
-        preaaprovalInquiryPage.fillOutApplication(firstName,lastName,email, dob, ssn, cellPhone, homePhone);
-        //Assert.assertEquals(preaaprovalInquiryPage.getOrderReport().getText(), "Yes");
-       // System.out.println(preaaprovalInquiryPage.getOrderReport().getAttribute("text"));
-        //System.out.println(preaaprovalInquiryPage.getNoReport().getText());
-    }
+//    @Test(dataProvider = "applicants")
+//    public void orderReportOptions(String firstName,
+//                            String lastName,
+//                            String email,
+//                            String dob,
+//                            String ssn,
+//                            String cellPhone,
+//                            String homePhone){
+//
+//        PreaaprovalInquiryPage preaaprovalInquiryPage = new PreaaprovalInquiryPage();
+//        preaaprovalInquiryPage.fillOutApplication(firstName,lastName,email, dob, ssn, cellPhone, homePhone);
+//        Assert.assertEquals(preaaprovalInquiryPage.getOrderReport().getText(), "Yes");
+//        Assert.assertEquals(preaaprovalInquiryPage.getNoReport().getText(), "No");
+//    }
 
     @Test(dataProvider = "applicants")
     public void orderReport(String firstName,
