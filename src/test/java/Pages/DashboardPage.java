@@ -36,6 +36,15 @@ public class DashboardPage {
     @FindBy(xpath = "//span[@class='menu-item'][contains(text(), \"Application List\")]")
     private WebElement applicationListButton;
 
+    @FindBy(xpath = "//span[@class='user-name']")
+    private WebElement accountInfo;
+
+
+
+    public WebElement getAccountInfo() {
+        return accountInfo;
+    }
+
     public WebElement getApplicationListButton() {
         return applicationListButton;
     }
