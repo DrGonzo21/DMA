@@ -39,7 +39,12 @@ public class DashboardPage {
     @FindBy(xpath = "//span[@class='user-name']")
     private WebElement accountInfo;
 
+    @FindBy (xpath = "//a[@class='dropdown-item']")
+    private WebElement logout;
 
+    public WebElement getLogout() {
+        return logout;
+    }
 
     public WebElement getAccountInfo() {
         return accountInfo;
