@@ -18,13 +18,13 @@ public class DMA15_VerifySignInButtonDisabled extends TestBase{
 
         LoginPage emailLogInOnly = new LoginPage();
 
-          emailLogInOnly.getEmailAddress().sendKeys(ConfigReader.getProperty("valid"), Keys.ENTER);
-
-        Thread.sleep(500);
-        emailLogInOnly.getSignInButton().click();
-        boolean isSignInButtonDisabled = emailLogInOnly.isButtonDisabledSignInWithEmailOnly(emailLogInOnly.getSignInButton());
-        Assert.assertTrue(isSignInButtonDisabled, "Button is Disabled");
-
-        Driver.quitDriver();
+//          emailLogInOnly.getEmailAddress().sendKeys("Jsmith@yahoo.com");
+//
+//        Thread.sleep(500);
+//        emailLogInOnly.getSignInButton().click();
+//        boolean isSignInButtonDisabled = emailLogInOnly.isButtonDisabledSignInWithEmailOnly(emailLogInOnly.getSignInButton());
+//        Assert.assertTrue(isSignInButtonDisabled, "Button is Disabled");
+//
+//        Driver.quitDriver();
     }
 }

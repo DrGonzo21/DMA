@@ -38,7 +38,7 @@ public class TestBase {
     @BeforeMethod(alwaysRun = true)
     public void setUp(Method method){
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-//        Driver.getDriver().manage().window().maximize();
+       Driver.getDriver().manage().window().maximize();
         Driver.getDriver().get(ConfigReader.getProperty("url"));
         logger = report.createTest(method.getName());
         logger.info("TEST STARTED: " + method.getName());
